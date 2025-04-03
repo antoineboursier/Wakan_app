@@ -1,0 +1,132 @@
+"use client"
+
+import { useRouter } from "next/navigation"
+import Image from "next/image"
+import { HelpCircle } from "lucide-react"
+import BottomNavigation from "@/components/bottom-navigation"
+
+export default function QuizPage() {
+  const router = useRouter()
+
+  return (
+    <div className="relative flex flex-col min-h-screen bg-gradient-to-b from-[#18272e] to-[#1c3039] text-white overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-[#253f4b]/30 blur-xl"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#18272e]/80 to-transparent"></div>
+      </div>
+
+      {/* Content container */}
+      <div className="relative z-10 flex flex-col items-center w-full max-w-md mx-auto px-4 pt-6 pb-20">
+        {/* Element quiz card */}
+        <div className="w-full bg-[#18272e] rounded-xl overflow-hidden mb-4">
+          <div className="relative">
+            <Image
+              src="/placeholder.svg?height=180&width=400"
+              alt="Elements background"
+              width={400}
+              height={180}
+              className="w-full h-[180px] object-cover"
+            />
+            <div className="absolute top-2 right-2">
+              <span className="bg-[#f6ae31] text-[#18272e] text-xs font-bold px-2 py-1 rounded-full flex items-center">
+                Nouveau <span className="ml-1 w-2 h-2 rounded-full bg-[#18272e]"></span>
+              </span>
+            </div>
+            <div className="absolute bottom-0 left-0 p-4">
+              <h2 className="text-3xl font-bold">
+                Quel est ton
+                <br />
+                élément ?
+              </h2>
+              <p className="text-[#f6ae31]">
+                Feu, terre, eau... Quel élément
+                <br />
+                naturel fait de toi ce que tu es ?
+              </p>
+            </div>
+          </div>
+          <div className="p-4">
+            <button
+              onClick={() => router.push("/quiz/element")}
+              className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-2 rounded-full flex items-center"
+            >
+              Tester mon élément
+              <HelpCircle className="ml-2 w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Stone quiz card */}
+        <div className="w-full bg-[#18272e] rounded-xl overflow-hidden mb-4">
+          <div className="relative">
+            <Image
+              src="/placeholder.svg?height=180&width=400"
+              alt="Crystals background"
+              width={400}
+              height={180}
+              className="w-full h-[180px] object-cover"
+            />
+            <div className="absolute bottom-0 left-0 p-4">
+              <h2 className="text-3xl font-bold">
+                De quelle pierre
+                <br />
+                as tu besoin en ce
+                <br />
+                moment ?
+              </h2>
+              <p className="text-[#f6ae31]">
+                Un quiz sans mauvaise réponse, pour
+                <br />
+                t'aider à savoir quelle pierre répond
+                <br />à ton besoin du moment !
+              </p>
+            </div>
+          </div>
+          <div className="p-4">
+            <button
+              onClick={() => router.push("/quiz/pierre")}
+              className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-2 rounded-full flex items-center"
+            >
+              Recommencer le quiz
+              <HelpCircle className="ml-2 w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Animal totem card */}
+        <div className="w-full bg-[#18272e] rounded-xl overflow-hidden mb-4">
+          <div className="relative">
+            <Image
+              src="/placeholder.svg?height=180&width=400"
+              alt="Totem animal background"
+              width={400}
+              height={180}
+              className="w-full h-[180px] object-cover"
+            />
+            <div className="absolute bottom-0 left-0 p-4">
+              <h2 className="text-3xl font-bold">Ton animal totem</h2>
+              <p className="text-[#f6ae31]">
+                Le chamanisme indien à ta porte :<br />
+                trouve quel animal sommeille en toi !
+              </p>
+            </div>
+          </div>
+          <div className="p-4">
+            <button
+              onClick={() => router.push("/quiz/totem")}
+              className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-2 rounded-full flex items-center"
+            >
+              Trouver mon totem
+              <HelpCircle className="ml-2 w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom navigation */}
+      <BottomNavigation activeTab="quiz" />
+    </div>
+  )
+}
+

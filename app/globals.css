@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Skranji&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 33% 14%;
+    --foreground: 20 29% 94%;
+
+    --card: 200 26% 14%;
+    --card-foreground: 20 29% 94%;
+
+    --popover: 200 26% 14%;
+    --popover-foreground: 20 29% 94%;
+
+    --primary: 35 91% 58%;
+    --primary-foreground: 200 26% 14%;
+
+    --secondary: 200 26% 22%;
+    --secondary-foreground: 20 29% 94%;
+
+    --muted: 27 24% 74%;
+    --muted-foreground: 20 29% 94%;
+
+    --accent: 50 91% 58%;
+    --accent-foreground: 200 26% 14%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 35 91% 58%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 35 91% 58%;
+
+    --radius: 0.75rem;
+  }
+
+  /* Définition des variables CSS pour les couleurs et tailles */
+  :root {
+    /* Couleurs de fond */
+    --background-900: #18272e;
+    --background-800: #1c3039;
+    --background-700: #253f4b;
+    --background-600: #2d4d5c;
+    --background-500: #365c6e;
+    --background-400: #3e6a7f;
+    --background-300: #467890;
+    --background-200: #4e87a1;
+    --background-100: #8db6c9;
+
+    /* Couleurs de texte */
+    --text-primary: #f4efeb;
+    --text-secondary: #cdbcae;
+    --text-tertiary: #969391;
+    --text-disabled: #939393;
+
+    /* Couleurs d'accent */
+    --accent-900: #f6ae31;
+    --accent-700: #f1ba5b;
+    --accent-500: #f5ce8a;
+    --accent-disabled: #b3ae9a;
+
+    /* Couleurs de texte sur accent */
+    --accent_text-on-900: #253f4b;
+    --accent_text-on-700: #1c3039;
+    --accent_text-on-500: #18272e;
+    --accent_text-on-disabled: #363f44;
+
+    /* Tailles */
+    --sizes-xs: 4px;
+    --sizes-s: 8px;
+    --sizes-sm: 12px;
+    --sizes-m: 16px;
+    --sizes-l: 24px;
+    --sizes-xl: 32px;
+    --sizes-2xl: 40px;
+    --sizes-3xl: 48px;
+    --sizes-4xl: 56px;
+
+    /* Dégradés */
+    --accent_gradient: linear-gradient(180deg, var(--accent-700) 2.04%, #f4930b 100%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "League Spartan", sans-serif;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Skranji", cursive;
+  }
+}
+
+/* Styles de texte personnalisés */
+@layer components {
+  .text-title-big {
+    font-family: "Skranji", cursive;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .text-title-med {
+    font-family: "Skranji", cursive;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .text-title-lit {
+    font-family: "Skranji", cursive;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .text-para-big {
+    font-family: "League Spartan", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .text-para {
+    font-family: "League Spartan", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .text-para-lit {
+    font-family: "League Spartan", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .text-legend {
+    font-family: "League Spartan", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .text-button {
+    font-family: "League Spartan", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 120%;
+  }
+
+  /* Styles de boutons */
+  .btn-primary {
+    display: inline-flex;
+    padding: var(--sizes-sm) var(--sizes-m);
+    align-items: center;
+    gap: var(--sizes-s);
+    border-radius: var(--sizes-m);
+    border: 1px solid var(--accent-500);
+    background: var(--accent_gradient);
+    box-shadow:
+      0px 2px 2px 0px rgba(24, 39, 46, 0.4),
+      0px 8px 32px 0px rgba(246, 174, 49, 0.6),
+      0px 2px 1px 0px rgba(244, 239, 235, 0.5) inset,
+      0px -2px 1px 0px rgba(24, 39, 46, 0.5) inset;
+    color: var(--accent_text-on-900);
+    font-family: "League Spartan", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .btn-primary-disabled {
+    display: inline-flex;
+    padding: var(--sizes-sm) var(--sizes-m);
+    align-items: center;
+    gap: var(--sizes-s);
+    border-radius: var(--sizes-m);
+    border: 1px solid var(--accent-disabled);
+    background: var(--accent-disabled);
+    box-shadow: 0px 2px 2px 0px rgba(24, 39, 46, 0.4), 0px 2px 1px 0px rgba(244, 239, 235, 0.5) inset, 0px -2px 1px 0px
+      rgba(24, 39, 46, 0.5) inset;
+    color: var(--accent_text-on-disabled);
+    font-family: "League Spartan", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    padding: var(--sizes-sm) var(--sizes-m);
+    align-items: center;
+    gap: var(--sizes-s);
+    border-radius: var(--sizes-m);
+    border: 1px solid var(--accent-700);
+    background: var(--background-800);
+    box-shadow: 0px 2px 1px 0px rgba(244, 239, 235, 0.2) inset, 0px -2px 1px 0px rgba(24, 39, 46, 0.2) inset;
+    color: var(--text-primary);
+    font-family: "League Spartan", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .btn-secondary-disabled {
+    display: inline-flex;
+    padding: var(--sizes-sm) var(--sizes-m);
+    align-items: center;
+    gap: var(--sizes-s);
+    border-radius: var(--sizes-m);
+    border: 1px solid var(--accent-disabled);
+    background: var(--background-800);
+    box-shadow: 0px 2px 1px 0px rgba(244, 239, 235, 0.2) inset, 0px -2px 1px 0px rgba(24, 39, 46, 0.2) inset;
+    color: var(--text-disabled);
+    font-family: "League Spartan", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: not-allowed;
+  }
+}
+
