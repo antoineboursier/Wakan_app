@@ -1,9 +1,37 @@
+"use client"
+
 import Image from "next/image"
 import { Sun, Moon } from "lucide-react"
 import BottomNavigation from "@/components/bottom-navigation"
 import { ButtonCustom } from "@/components/ui/button-custom"
+import { useEffect, useState } from "react"
+import { supabase } from "@/lib/supabaseClient"
+
 
 export default function WakanApp() {
+
+  const [lunarData, setLunarData] = useState<any | null>(null)
+
+  useEffect(() => {
+    const fetchLunarData = async () => {
+      const today = new Date().toISOString().split("T")[0] // format: YYYY-MM-DD
+
+      const { data, error } = await supabase
+        .from("lunar_data")
+        .select("*")
+        .eq("date", today)
+        .single()
+
+      if (error) {
+        console.error("Erreur Supabase :", error)
+      } else {
+        setLunarData(data)
+      }
+    }
+
+    fetchLunarData()
+  }, [])
+
   return (
     <div className="relative flex flex-col items-center min-h-screen bg-gradient-to-b from-[#18272e] to-[#1c3039] text-white overflow-hidden">
       {/* Background elements */}
@@ -52,6 +80,13 @@ export default function WakanApp() {
             WAKAN
           </h1>
         </div>
+
+        {lunarData && (
+    <p className="text-white">
+    Phase : {lunarData.phase_name} – Lune en {lunarData.moon_sign}
+  </p>
+)}
+
 
         {/* Grid layout for cards */}
         <div className="grid grid-cols-2 gap-4 w-full mb-6">
@@ -149,10 +184,6 @@ export default function WakanApp() {
         </div>
 
         {/* Astro du jour button */}
-        <button className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold text-xl px-8 py-3 rounded-full mb-4 flex items-center">
-          Astro du jour
-          <Sun className="ml-2 w-6 h-6" />
-        </button>
         <ButtonCustom variant="primary" className="text-button">
           Astro du jour
           <Sun className="ml-2 w-6 h-6" />
