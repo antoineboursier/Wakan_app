@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-import { Share2, Award, BookOpen } from "lucide-react"
+import { Share2, Award, BookOpen, LockKeyhole } from "lucide-react"
 import { ButtonCustom } from "@/components/ui/button-custom"
 
 
