@@ -219,9 +219,6 @@ export default function InfosPage() {
           </div>
         </div>
       </div>
-
-      {/* Bottom navigation */}
-      <BottomNavigation activeTab="astres" />
     </div>
   )
 }
