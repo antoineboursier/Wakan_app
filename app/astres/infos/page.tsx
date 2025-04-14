@@ -5,7 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Bell } from "lucide-react"
-import BottomNavigation from "@/components/bottom-navigation"
+import { ButtonCustom } from "@/components/ui/button-custom"
 
 export default function InfosPage() {
   const router = useRouter()

@@ -290,7 +290,6 @@ function FilterPopup({ onClose }: { onClose: () => void }) {
           </div>
         </div>
 
-        {/* Apply button */}
         <ButtonCustom variant="primary" onClick={applyFilters} className="w-full">
           Appliquer les filtres
         </ButtonCustom>

@@ -5,6 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { X, Wand2 } from "lucide-react"
+import { ButtonCustom } from "@/components/ui/button-custom"
 
 export default function InfoSupplementairePage() {
   const router = useRouter()

@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { ArrowLeft, Share2, Plus } from "lucide-react"
-import BottomNavigation from "@/components/bottom-navigation"
+import { ButtonCustom } from "@/components/ui/button-custom"
 
 export default function ProfilZodiacPage() {
   const router = useRouter()
