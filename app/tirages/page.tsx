@@ -41,21 +41,6 @@ export default function TiragesPage() {
               <BookOpen className="ml-2 w-4 h-4" />
           </ButtonCustom>
 
-          <ButtonCustom 
-            onClick={() => router.push("/tirages/rune/complete")} 
-            className="flex items-center">
-            3 runes
-            <BookOpen className="ml-2 w-4 h-4" />
-          </ButtonCustom>
-
-          <ButtonCustom
-            onClick={() => router.push("/tirages/rune/complete")}
-            className="mb-3 flex items-center"
-          >
-            3 runes
-            <BookOpen className="ml-2 w-4 h-4" />
-          </ButtonCustom>
-
           <ButtonCustom
             disabled
             variant="secondary"
@@ -63,16 +48,7 @@ export default function TiragesPage() {
             className="mb-3 flex items-center"
           >
             3 runes
-            <BookOpen className="ml-2 w-4 h-4" />
-          </ButtonCustom>
-
-          <ButtonCustom
-            variant="secondary"
-            onClick={() => router.push("/tirages/rune/complete")}
-            className="mb-3 flex items-center"
-          >
-            3 runes
-            <BookOpen className="ml-2 w-4 h-4" />
+            <LockKeyhole className="ml-2 w-4 h-4" />
           </ButtonCustom>
 
             <p className="text-xs text-[#cdbcae] mt-2">1 rune gratuit/jour</p>
@@ -94,21 +70,24 @@ export default function TiragesPage() {
               <p className="text-[#f6ae31]">Découvre la prédiction tarot du jour</p>
             </div>
           </div>
-          <div className="p-4">
-            <button
-              onClick={() => router.push("/tirages/tarot")}
-              className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-2 rounded-full mb-3 flex items-center"
-            >
-              Dévoiler ma carte
-              <BookOpen className="ml-2 w-4 h-4" />
-            </button>
-            <button
-              onClick={() => router.push("/tirages/tarot/complete")}
-              className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] px-4 py-2 rounded-full flex items-center"
-            >
-              5 cartes
-              <BookOpen className="ml-2 w-4 h-4" />
-            </button>
+          <div className="p-4">            
+            <ButtonCustom
+            onClick={() => router.push("/tirages/tarot")}
+            className="mb-3 flex items-center"
+          >
+            Dévoiler ma carte
+            <BookOpen className="ml-2 w-4 h-4" />
+          </ButtonCustom>
+
+          <ButtonCustom
+            disabled
+            variant="secondary"
+            onClick={() => router.push("/tirages/tarot/complete")}
+            className="mb-3 flex items-center"
+          >
+            5 cartes
+            <LockKeyhole className="ml-2 w-4 h-4" />
+          </ButtonCustom>
           </div>
         </div>
 
@@ -135,13 +114,13 @@ export default function TiragesPage() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a tortor est. Suspendisse bibendum dapibus
             tortor id pulvinar. Nulla laoreet lorem et lacus gravida, quis tempus ex porta. Duis r...
           </p>
-          <button
+          <ButtonCustom
             onClick={() => router.push("/tirages/rune/complete")}
-            className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] px-4 py-2 rounded-full flex items-center"
+            className="mb-3 flex items-center"
           >
             Préciser à 3 runes
             <BookOpen className="ml-2 w-4 h-4" />
-          </button>
+          </ButtonCustom>
         </div>
 
         {/* Multiple runes result */}
@@ -202,13 +181,15 @@ export default function TiragesPage() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a tortor est. Suspendisse bibendum dapibus
             tortor id pulvinar. Nulla laoreet lorem et lacus gravida, quis tempus ex porta. Duis r...
           </p>
-          <button
+          <ButtonCustom
+            disabled
+            variant="secondary"
             onClick={() => router.push("/tirages/tarot/complete")}
-            className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] px-4 py-2 rounded-full flex items-center"
+            className="mb-3 flex items-center"
           >
-            Préciser à 5 tarots
+            réciser à 5 tarots
             <BookOpen className="ml-2 w-4 h-4" />
-          </button>
+          </ButtonCustom>
         </div>
       </div>
 

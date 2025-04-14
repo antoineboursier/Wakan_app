@@ -176,13 +176,13 @@ export default function AstresPage() {
             </div>
           </div>
 
-          <button
-            className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-2 rounded-full mt-4 flex items-center"
+          <ButtonCustom
             onClick={() => router.push("/astres/profil-zodiac")}
+            className="mb-3 flex items-center"
           >
             Compléter
             <Plus className="ml-2 w-4 h-4" />
-          </button>
+          </ButtonCustom>
         </div>
 
         {/* Lunar profile form */}
@@ -265,13 +265,13 @@ export default function AstresPage() {
             </div>
           </div>
 
-          <button
-            className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-2 rounded-full mt-4 flex items-center"
+          <ButtonCustom
             onClick={() => router.push("/astres/profil-lunaire")}
+            className="mb-3 flex items-center"
           >
             Compléter
             <Plus className="ml-2 w-4 h-4" />
-          </button>
+          </ButtonCustom>
         </div>
 
         {/* Aztec profile form */}
@@ -310,10 +310,13 @@ export default function AstresPage() {
             </div>
           </div>
 
-          <button className="bg-[#cdbcae]/30 text-[#cdbcae] px-4 py-2 rounded-full mt-4 flex items-center">
+          <ButtonCustom
+            onClick={() => router.push("/astres/profil-lunaire")}
+            className="mb-3 flex items-center"
+          >
             Compléter
             <Lock className="ml-2 w-4 h-4" />
-          </button>
+          </ButtonCustom>
         </div>
 
         {/* Decorative element */}

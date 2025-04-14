@@ -48,13 +48,13 @@ export default function QuizPage() {
             </div>
           </div>
           <div className="p-4">
-            <button
-              onClick={() => router.push("/quiz/element")}
-              className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-2 rounded-full flex items-center"
-            >
-              Tester mon élément
-              <HelpCircle className="ml-2 w-4 h-4" />
-            </button>
+            <ButtonCustom
+            onClick={() => router.push("/quiz/element")}
+            className="mb-3 flex items-center"
+          >
+            Tester mon élément
+            <BookOpen className="ml-2 w-4 h-4" />
+          </ButtonCustom>
           </div>
         </div>
 
@@ -85,13 +85,13 @@ export default function QuizPage() {
             </div>
           </div>
           <div className="p-4">
-            <button
-              onClick={() => router.push("/quiz/pierre")}
-              className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-2 rounded-full flex items-center"
-            >
-              Recommencer le quiz
-              <HelpCircle className="ml-2 w-4 h-4" />
-            </button>
+            <ButtonCustom
+            onClick={() => router.push("/quiz/pierre")}
+            className="mb-3 flex items-center"
+          >
+            Recommencer le quiz
+            <BookOpen className="ml-2 w-4 h-4" />
+          </ButtonCustom>
           </div>
         </div>
 
@@ -114,13 +114,13 @@ export default function QuizPage() {
             </div>
           </div>
           <div className="p-4">
-            <button
-              onClick={() => router.push("/quiz/totem")}
-              className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-2 rounded-full flex items-center"
-            >
-              Trouver mon totem
-              <HelpCircle className="ml-2 w-4 h-4" />
-            </button>
+            <ButtonCustom
+            onClick={() => router.push("/quiz/totem")}
+            className="mb-3 flex items-center"
+          >
+            Trouver mon totem
+            <BookOpen className="ml-2 w-4 h-4" />
+          </ButtonCustom>
           </div>
         </div>
       </div>

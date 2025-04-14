@@ -80,13 +80,14 @@ export default function ProfilZodiacPage() {
 
             {/* Missing information button */}
             <div className="flex justify-center">
-              <button
-                className="flex items-center text-[#cdbcae] border border-[#cdbcae] rounded-full px-4 py-2"
+              <ButtonCustom
+                variant="secondary"
                 onClick={() => router.push("/astres/info-supplementaire?field=lieu-naissance")}
+                className="mb-3 flex items-center"
               >
-                <Plus className="w-4 h-4 mr-2" />
                 Ajoute ton lieu de naissance
-              </button>
+                <Plus className="ml-2 w-4 h-4" />
+              </ButtonCustom>
             </div>
           </div>
 

@@ -124,13 +124,13 @@ export default function InfoSupplementairePage() {
           )}
         </div>
 
-        <button
+        <ButtonCustom
           onClick={handleSave}
-          className="w-full bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-3 rounded-full flex items-center justify-center"
+          className="mb-3 flex items-center"
         >
           Enregistrer
-          <Wand2 className="ml-2 w-5 h-5" />
-        </button>
+          <Wand2 className="ml-2 w-4 h-4" />
+        </ButtonCustom>
       </div>
     </div>
   )
