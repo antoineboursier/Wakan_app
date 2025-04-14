@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-import { HelpCircle } from "lucide-react"
+import { BookOpen } from "lucide-react"
 import { ButtonCustom } from "@/components/ui/button-custom"
+
 
 
 export default function QuizPage() {
