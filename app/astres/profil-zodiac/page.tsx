@@ -121,9 +121,6 @@ export default function ProfilZodiacPage() {
           </div>
         </div>
       </div>
-
-      {/* Bottom navigation */}
-      <BottomNavigation activeTab="astres" />
     </div>
   )
 }
