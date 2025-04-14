@@ -1,12 +1,17 @@
+'use client'
+
 import React from 'react'
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Home, BookOpen, HelpCircle, Star, FileText } from 'lucide-react'
 
-interface BottomNavigationProps {
-  activeTab: "accueil" | "tirages" | "quiz" | "astres" | "journal"
-}
+export default function BottomNavigation() {
+  const pathname = usePathname()
 
-export default function BottomNavigation({ activeTab }: BottomNavigationProps) {
+  const getActive = (tab: string) => {
+    return pathname === tab || pathname.startsWith(tab + '/')
+  }
+
   return (
     <div 
       className="fixed bottom-0 left-0 right-0 z-20"
@@ -22,9 +27,9 @@ export default function BottomNavigation({ activeTab }: BottomNavigationProps) {
         <Link
           href="/"
           className="flex flex-col items-center p-2"
-          style={{ 
-            color: activeTab === "accueil" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)",
-            opacity: activeTab === "accueil" ? 1 : 0.5
+          style={{
+            color: getActive('/') ? "var(--text-primary)" : "var(--text-secondary)",
+            opacity: getActive('/') ? 1 : 0.5
           }}
         >
           <Home className="w-6 h-6 mb-1" />
@@ -33,9 +38,9 @@ export default function BottomNavigation({ activeTab }: BottomNavigationProps) {
         <Link
           href="/tirages"
           className="flex flex-col items-center p-2"
-          style={{ 
-            color: activeTab === "tirages" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)",
-            opacity: activeTab === "tirages" ? 1 : 0.5
+          style={{
+            color: getActive('/tirages') ? "var(--text-primary)" : "var(--text-secondary)",
+            opacity: getActive('/tirages') ? 1 : 0.5
           }}
         >
           <BookOpen className="w-6 h-6 mb-1" />
@@ -44,9 +49,9 @@ export default function BottomNavigation({ activeTab }: BottomNavigationProps) {
         <Link
           href="/quiz"
           className="flex flex-col items-center p-2"
-          style={{ 
-            color: activeTab === "quiz" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)",
-            opacity: activeTab === "quiz" ? 1 : 0.5
+          style={{
+            color: getActive('/quiz') ? "var(--text-primary)" : "var(--text-secondary)",
+            opacity: getActive('/quiz') ? 1 : 0.5
           }}
         >
           <HelpCircle className="w-6 h-6 mb-1" />
@@ -55,9 +60,9 @@ export default function BottomNavigation({ activeTab }: BottomNavigationProps) {
         <Link
           href="/astres"
           className="flex flex-col items-center p-2"
-          style={{ 
-            color: activeTab === "astres" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)",
-            opacity: activeTab === "astres" ? 1 : 0.5
+          style={{
+            color: getActive('/astres') ? "var(--text-primary)" : "var(--text-secondary)",
+            opacity: getActive('/astres') ? 1 : 0.5
           }}
         >
           <Star className="w-6 h-6 mb-1" />
@@ -66,9 +71,9 @@ export default function BottomNavigation({ activeTab }: BottomNavigationProps) {
         <Link
           href="/journal"
           className="flex flex-col items-center p-2"
-          style={{ 
-            color: activeTab === "journal" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)",
-            opacity: activeTab === "journal" ? 1 : 0.5
+          style={{
+            color: getActive('/journal') ? "var(--text-primary)" : "var(--text-secondary)",
+            opacity: getActive('/journal') ? 1 : 0.5
           }}
         >
           <FileText className="w-6 h-6 mb-1" />
