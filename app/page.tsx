@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Sun, Moon } from "lucide-react"
 import BottomNavigation from "@/components/bottom-navigation"
+import { ButtonCustom } from "@/components/ui/button-custom"
 
 export default function WakanApp() {
   return (
@@ -152,6 +153,10 @@ export default function WakanApp() {
           Astro du jour
           <Sun className="ml-2 w-6 h-6" />
         </button>
+        <ButtonCustom variant="primary" className="text-button">
+          Astro du jour
+          <Sun className="ml-2 w-6 h-6" />
+        </ButtonCustom>
 
         {/* Free draws counter */}
         <p className="text-[#cdbcae] mb-8">10 tirages gratuits/mois - 8 restants</p>
