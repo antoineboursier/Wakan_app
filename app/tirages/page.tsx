@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Share2, Award, BookOpen } from "lucide-react"
-import BottomNavigation from "@/components/bottom-navigation"
 
 export default function TiragesPage() {
   const router = useRouter()
@@ -185,8 +184,6 @@ export default function TiragesPage() {
         </div>
       </div>
 
-      {/* Bottom navigation */}
-      <BottomNavigation activeTab="tirages" />
     </div>
   )
 }

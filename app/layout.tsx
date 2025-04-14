@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import BottomNavigation from '@/components/bottom-navigation'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Wakan',
+  description: 'Application spirituelle quotidienne',
 }
 
 export default function RootLayout({
@@ -13,8 +13,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="fr">
+      <body className="min-h-screen flex flex-col">
+        <main className="flex-1">{children}</main>
+        <BottomNavigation activeTab="accueil" />
+      </body>
     </html>
   )
 }

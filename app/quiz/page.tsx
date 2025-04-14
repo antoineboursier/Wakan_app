@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { HelpCircle } from "lucide-react"
-import BottomNavigation from "@/components/bottom-navigation"
 
 export default function QuizPage() {
   const router = useRouter()
@@ -123,9 +122,6 @@ export default function QuizPage() {
           </div>
         </div>
       </div>
-
-      {/* Bottom navigation */}
-      <BottomNavigation activeTab="quiz" />
     </div>
   )
 }

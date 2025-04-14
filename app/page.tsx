@@ -187,9 +187,6 @@ export default function WakanApp() {
             </div>
           </div>
         </div>
-
-        {/* Bottom navigation */}
-        <BottomNavigation activeTab="accueil" />
       </div>
     </div>
   )

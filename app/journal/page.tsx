@@ -6,7 +6,6 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Lock, Search, Filter, X } from "lucide-react"
-import BottomNavigation from "@/components/bottom-navigation"
 import { ButtonCustom } from "@/components/ui/button-custom"
 
 // Types pour les articles
@@ -183,8 +182,6 @@ export default function JournalPage() {
       {/* Filter popup */}
       {showFilterPopup && <FilterPopup onClose={() => setShowFilterPopup(false)} />}
 
-      {/* Bottom navigation */}
-      <BottomNavigation activeTab="journal" />
     </div>
   )
 }
