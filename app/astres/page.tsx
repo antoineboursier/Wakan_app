@@ -4,6 +4,8 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Bell, ChevronRight, Lock, X, Plus, Camera, Upload } from "lucide-react"
+import { ButtonCustom } from "@/components/ui/button-custom"
+
 
 export default function AstresPage() {
   const router = useRouter()

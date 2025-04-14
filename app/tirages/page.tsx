@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Share2, Award, BookOpen } from "lucide-react"
+import { ButtonCustom } from "@/components/ui/button-custom"
+
 
 export default function TiragesPage() {
   const router = useRouter()
