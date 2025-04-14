@@ -1,36 +1,35 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { Sun, Moon } from "lucide-react"
-import BottomNavigation from "@/components/bottom-navigation"
-import { ButtonCustom } from "@/components/ui/button-custom"
-import { useEffect, useState } from "react"
-import { supabase } from "@/lib/supabaseClient"
-
+import Image from "next/image";
+import { Sun, Moon } from "lucide-react";
+import BottomNavigation from "@/components/bottom-navigation";
+import { ButtonCustom } from "@/components/ui/button-custom";
+import { supabase } from "@/lib/supabaseClient";
+import React, { useState, useEffect } from "react";
 
 export default function WakanApp() {
-
-  const [lunarData, setLunarData] = useState<any | null>(null)
+  const [lunarData, setLunarData] = useState(null);
 
   useEffect(() => {
     const fetchLunarData = async () => {
-      const today = new Date().toISOString().split("T")[0] // format: YYYY-MM-DD
+      const today = "2025-04-14";
 
       const { data, error } = await supabase
         .from("lunar_data")
         .select("*")
         .eq("date", today)
-        .single()
+        .maybeSingle();
 
       if (error) {
-        console.error("Erreur Supabase :", error)
+        console.error("Erreur Supabase:", error);
       } else {
-        setLunarData(data)
+        console.log("Résultat Supabase corrigé :", data);
+        setLunarData(data);
       }
-    }
+    };
 
-    fetchLunarData()
-  }, [])
+    fetchLunarData();
+  }, []);
 
   return (
     <div className="relative flex flex-col items-center min-h-screen bg-gradient-to-b from-[#18272e] to-[#1c3039] text-white overflow-hidden">
@@ -61,32 +60,21 @@ export default function WakanApp() {
       {/* Content container */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-md px-4 pt-10 pb-20">
         {/* Logo */}
-        <div className="relative mb-8">
-          <div className="w-[120px] h-[120px] rounded-full border-2 border-[#f6ae31]/50 border-dashed flex items-center justify-center">
-            <div className="w-[100px] h-[100px] rounded-full border-2 border-[#f6ae31] flex items-center justify-center">
-              <div className="w-[80px] h-[80px] rounded-full bg-transparent"></div>
-            </div>
-          </div>
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <Image
-              src="/placeholder.svg?height=40&width=60"
-              alt="Bird logo"
-              width={60}
-              height={40}
-              className="object-contain"
-            />
-          </div>
-          <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl font-bold text-white">
-            WAKAN
-          </h1>
+        <div className="relative w-[114px] h-[104px]">
+          <Image
+            src="/logo_app.svg"
+            alt="Logo"
+            fill
+            priority
+            className="object-contain"
+          />
         </div>
 
         {lunarData && (
-    <p className="text-white">
-    Phase : {lunarData.phase_name} – Lune en {lunarData.moon_sign}
-  </p>
-)}
-
+          <p className="text-white">
+            Phase : {lunarData.phase_name} – Lune en {lunarData.moon_sign}
+          </p>
+        )}
 
         {/* Grid layout for cards */}
         <div className="grid grid-cols-2 gap-4 w-full mb-6">
@@ -190,7 +178,9 @@ export default function WakanApp() {
         </ButtonCustom>
 
         {/* Free draws counter */}
-        <p className="text-[#cdbcae] mb-8">10 tirages gratuits/mois - 8 restants</p>
+        <p className="text-[#cdbcae] mb-8">
+          10 tirages gratuits/mois - 8 restants
+        </p>
 
         {/* Decorative element */}
         <div className="relative w-12 h-12 mb-8">
@@ -207,11 +197,21 @@ export default function WakanApp() {
             <div>
               <p className="text-[#cdbcae] mb-1">Accès premium</p>
               <h3 className="text-2xl font-bold text-[#f6ae31]">2€/mois</h3>
-              <p className="text-[#f6ae31] font-bold mb-1">Débloque tout, sans mauvaise surprise.</p>
-              <p className="text-[#cdbcae] text-sm">Et bien sûr, c'est sans engagement.</p>
+              <p className="text-[#f6ae31] font-bold mb-1">
+                Débloque tout, sans mauvaise surprise.
+              </p>
+              <p className="text-[#cdbcae] text-sm">
+                Et bien sûr, c'est sans engagement.
+              </p>
             </div>
             <div className="bg-white rounded-full p-2">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M5 12H19M19 12L12 5M19 12L12 19"
                   stroke="#18272e"
@@ -225,6 +225,5 @@ export default function WakanApp() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
