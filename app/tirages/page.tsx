@@ -35,29 +35,45 @@ export default function TiragesPage() {
             </div>
           </div>
           <div className="p-4 flex flex-col items-start">
-            <button
-              onClick={() => router.push("/tirages/rune")}
-              className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] font-bold px-4 py-2 rounded-full mb-3 flex items-center"
-            >
-              Tirer ma rune
-              <BookOpen className="ml-2 w-4 h-4" />
-            </button>
+            
             <ButtonCustom onClick={() => router.push("/tirages/rune")} className="mb-3 flex items-center">
               Tirer ma rune
               <BookOpen className="ml-2 w-4 h-4" />
           </ButtonCustom>
 
-            <button
-              onClick={() => router.push("/tirages/rune/complete")}
-              className="bg-gradient-to-r from-[#f1ba5b] to-[#f5ce8a] text-[#18272e] px-4 py-2 rounded-full flex items-center"
-            >
-              3 runes
-              <BookOpen className="ml-2 w-4 h-4" />
-            </button>
-            <ButtonCustom onClick={() => router.push("/tirages/rune/complete")} className="flex items-center">
-              3 runes
-              <BookOpen className="ml-2 w-4 h-4" />
-            </ButtonCustom>
+          <ButtonCustom 
+            onClick={() => router.push("/tirages/rune/complete")} 
+            className="flex items-center">
+            3 runes
+            <BookOpen className="ml-2 w-4 h-4" />
+          </ButtonCustom>
+
+          <ButtonCustom
+            onClick={() => router.push("/tirages/rune/complete")}
+            className="mb-3 flex items-center"
+          >
+            3 runes
+            <BookOpen className="ml-2 w-4 h-4" />
+          </ButtonCustom>
+
+          <ButtonCustom
+            disabled
+            variant="secondary"
+            onClick={() => router.push("/tirages/rune/complete")}
+            className="mb-3 flex items-center"
+          >
+            3 runes
+            <BookOpen className="ml-2 w-4 h-4" />
+          </ButtonCustom>
+
+          <ButtonCustom
+            variant="secondary"
+            onClick={() => router.push("/tirages/rune/complete")}
+            className="mb-3 flex items-center"
+          >
+            3 runes
+            <BookOpen className="ml-2 w-4 h-4" />
+          </ButtonCustom>
 
             <p className="text-xs text-[#cdbcae] mt-2">1 rune gratuit/jour</p>
           </div>
