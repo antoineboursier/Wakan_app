@@ -23,101 +23,56 @@ export default function BottomNavigation({ activeTab }: BottomNavigationProps) {
           href="/"
           className="flex flex-col items-center p-2"
           style={{ 
-            color: activeTab === "accueil" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)"
+            color: activeTab === "accueil" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)",
+            opacity: activeTab === "accueil" ? 1 : 0.5
           }}
         >
           <Home className="w-6 h-6 mb-1" />
-          <span 
-            style={{
-              fontFamily: "League Spartan",
-              fontSize: "13px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "120%"
-            }}
-          >
-            Accueil
-          </span>
+          <span className="text-tabbar">Accueil</span>
         </Link>
         <Link
           href="/tirages"
           className="flex flex-col items-center p-2"
           style={{ 
-            color: activeTab === "tirages" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)"
+            color: activeTab === "tirages" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)",
+            opacity: activeTab === "tirages" ? 1 : 0.5
           }}
         >
           <BookOpen className="w-6 h-6 mb-1" />
-          <span 
-            style={{
-              fontFamily: "League Spartan",
-              fontSize: "13px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "120%"
-            }}
-          >
-            Tirages
-          </span>
+          <span className="text-tabbar">Tirages</span>
         </Link>
         <Link
           href="/quiz"
           className="flex flex-col items-center p-2"
           style={{ 
-            color: activeTab === "quiz" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)"
+            color: activeTab === "quiz" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)",
+            opacity: activeTab === "quiz" ? 1 : 0.5
           }}
         >
           <HelpCircle className="w-6 h-6 mb-1" />
-          <span 
-            style={{
-              fontFamily: "League Spartan",
-              fontSize: "13px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "120%"
-            }}
-          >
-            Quiz
-          </span>
+          <span className="text-tabbar">Quiz</span>
         </Link>
         <Link
           href="/astres"
           className="flex flex-col items-center p-2"
           style={{ 
-            color: activeTab === "astres" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)"
+            color: activeTab === "astres" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)",
+            opacity: activeTab === "astres" ? 1 : 0.5
           }}
         >
           <Star className="w-6 h-6 mb-1" />
-          <span 
-            style={{
-              fontFamily: "League Spartan",
-              fontSize: "13px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "120%"
-            }}
-          >
-            Astres
-          </span>
+          <span className="text-tabbar">Astres</span>
         </Link>
         <Link
           href="/journal"
           className="flex flex-col items-center p-2"
           style={{ 
-            color: activeTab === "journal" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)"
+            color: activeTab === "journal" ? "var(--text-primary, #F4EFEB)" : "var(--text-secondary, #CDBCAE)",
+            opacity: activeTab === "journal" ? 1 : 0.5
           }}
         >
           <FileText className="w-6 h-6 mb-1" />
-          <span 
-            style={{
-              fontFamily: "League Spartan",
-              fontSize: "13px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "120%"
-            }}
-          >
-            Journal
-          </span>
+          <span className="text-tabbar">Journal</span>
         </Link>
       </div>
     </div>
