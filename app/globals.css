@@ -89,7 +89,8 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: var(--background-900);
     font-family: "League Spartan", sans-serif;
   }
   h1,

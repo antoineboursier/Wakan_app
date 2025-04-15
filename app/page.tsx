@@ -34,7 +34,6 @@ export default function WakanApp() {
 
   return (
     <div className="relative flex flex-col items-center min-h-screen bg-gradient-to-b from-[#18272e] to-[#1c3039] text-white overflow-hidden">
-      {/* Background elements */}
       <PageBackground imagePath="/backgrounds/home.png" />
       {/* Content container */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-md px-4 pt-10 pb-20">

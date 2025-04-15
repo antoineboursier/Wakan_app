@@ -11,11 +11,8 @@ export default function TiragesPage() {
 
   return (
     <div className="relative flex flex-col min-h-screen bg-gradient-to-b from-[#18272e] to-[#1c3039] text-white overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-[#253f4b]/30 blur-xl"></div>
-        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#18272e]/80 to-transparent"></div>
-      </div>
+
+      <PageBackground imagePath="/backgrounds/tirages.png" />
 
       {/* Content container */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-md mx-auto px-4 pt-6 pb-20">

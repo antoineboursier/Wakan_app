@@ -47,13 +47,9 @@ export default function JournalPage() {
 
   return (
     <div className="relative flex flex-col min-h-screen">
-      {/* Background elements */}
-      <div
-        className="absolute inset-0 z-0 overflow-hidden"
-        style={{
-          background: "linear-gradient(180deg, var(--background-900) 0%, var(--background-800) 100%)",
-        }}
-      >
+
+      <PageBackground imagePath="/backgrounds/journal.png" />
+
         <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=400')] bg-cover bg-center opacity-20"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(24,39,46,0.7)] to-[rgba(28,48,57,0.9)]"></div>
         {/* Étoiles et éléments mystiques */}
