@@ -59,15 +59,9 @@ export default function WakanApp() {
             className="object-contain"
           />
         </div>
-
-        {/* Affichage des données Luna_app */}
-
-        {lunarData && (
-          <p className="text-white">
-            Phase : {lunarData.phase_name} – Lune en {lunarData.moon_sign}
-          </p>
-        )}
         
+      {/*Calendrier */}
+
       <input
         type="date"
         value={selectedDate}
@@ -75,9 +69,8 @@ export default function WakanApp() {
         className="text-black rounded px-3 py-2 mt-6 mb-4"
       />
 
-      <p className="text-sm text-white mt-2">Date choisie : {selectedDate}</p>
-
         {/* Grid layout for cards */}
+
         <div className="grid grid-cols-2 gap-4 w-full mb-6">
 
           {/* Day of lunar cycle */}
@@ -96,7 +89,7 @@ export default function WakanApp() {
           </div>
 
            {/* Day of lunar cycle 2 */}
-           <div className="bg-[--background-900] rounded-xl p-4 flex flex-col items-center justify-center">
+           <div className="card-glass p-4 flex flex-col items-center justify-center">
             <div className="relative w-20 h-20">
               {/* Cercle de fond */}
               <div className="absolute inset-0 rounded-full" style={{
@@ -104,16 +97,21 @@ export default function WakanApp() {
               }} />
 
               {/* Cercle jaune */}
-              <div className="absolute inset-0 rounded-full" style={{
-                background: `conic-gradient(from 180deg at 50% 50%, var(--accent-900) ${(lunarData?.day_of_cycle ?? 0) / 29 * 360}deg, transparent 0deg)`
-              }} />
+              <div
+                className="absolute inset-0 rounded-full overflow-hidden"
+                style={{
+                  background: `conic-gradient(from 180deg at 50% 50%, var(--accent-900) ${angle}deg, transparent 0deg)`,
+                  maskImage: "radial-gradient(white, black)",
+                  WebkitMaskImage: "radial-gradient(white, black)",
+                }}
+              />
 
-              {/* Contenu centré */}
+              {/* Contenu */}
               <div className="absolute inset-[6px] rounded-full bg-[--background-900] flex flex-col items-center justify-center text-center">
-                <h2 className="text-title-med text-[--text-primary] leading-none">
+                <h2 className="text-title-med text-[--text-primary] leading-none mb-1">
                   {lunarData?.day_of_cycle ? `J${lunarData.day_of_cycle}` : "—"}
                 </h2>
-                <p className="text-para-lit text-[--text-secondary] leading-tight">
+                <p className="text-para-lit text-[--text-secondary] leading-none">
                   du cycle<br />lunaire
                 </p>
               </div>
