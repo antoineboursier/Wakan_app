@@ -8,29 +8,41 @@ import { supabase } from "@/lib/supabaseClient";
 import React, { useState, useEffect } from "react";
 import PageBackground from "@/components/PageBackground"
 
-export default function WakanApp() {
-  const [lunarData, setLunarData] = useState(null);
 
+export default function WakanApp() {
+
+  //
+  // Récup des données pour supabase 
+  //
+
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const today = new Date().toISOString().split("T")[0]
+    return today
+  })
+  const [lunarData, setLunarData] = useState(null)
+  
   useEffect(() => {
     const fetchLunarData = async () => {
-      const today = "2025-04-14";
-
       const { data, error } = await supabase
         .from("lunar_data")
         .select("*")
-        .eq("date", today)
-        .maybeSingle();
-
+        .eq("date", selectedDate)
+        .maybeSingle()
+  
       if (error) {
-        console.error("Erreur Supabase:", error);
+        console.error("Erreur Supabase :", error)
+        setLunarData(null)
       } else {
-        console.log("Résultat Supabase corrigé :", data);
-        setLunarData(data);
+        setLunarData(data)
       }
-    };
+    }
+  
+    fetchLunarData()
+  }, [selectedDate])
 
-    fetchLunarData();
-  }, []);
+  //
+  // Content de la page
+  //
 
   return (
     <div className="relative flex flex-col items-center min-h-screen bg-gradient-to-b from-[#18272e] to-[#1c3039] text-white overflow-hidden">
@@ -48,11 +60,22 @@ export default function WakanApp() {
           />
         </div>
 
+        {/* Affichage des données Luna_app */}
+
         {lunarData && (
           <p className="text-white">
             Phase : {lunarData.phase_name} – Lune en {lunarData.moon_sign}
           </p>
         )}
+        
+      <input
+        type="date"
+        value={selectedDate}
+        onChange={(e) => setSelectedDate(e.target.value)}
+        className="text-black rounded px-3 py-2 mt-6 mb-4"
+      />
+
+      <p className="text-sm text-white mt-2">Date choisie : {selectedDate}</p>
 
         {/* Grid layout for cards */}
         <div className="grid grid-cols-2 gap-4 w-full mb-6">
