@@ -51,15 +51,6 @@ export default function JournalPage() {
 
       <PageBackground imagePath="/backgrounds/journal.png" />
 
-        <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=400')] bg-cover bg-center opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(24,39,46,0.7)] to-[rgba(28,48,57,0.9)]"></div>
-        {/* Étoiles et éléments mystiques */}
-        <div className="absolute top-20 left-10 w-2 h-2 rounded-full bg-white opacity-70"></div>
-        <div className="absolute top-40 right-20 w-1 h-1 rounded-full bg-white opacity-50"></div>
-        <div className="absolute top-60 left-30 w-1.5 h-1.5 rounded-full bg-white opacity-60"></div>
-        <div className="absolute bottom-40 right-10 w-2 h-2 rounded-full bg-white opacity-70"></div>
-      </div>
-
       {/* Content container */}
       <div className="relative z-10 flex flex-col w-full max-w-md mx-auto px-4 pt-6 pb-20">
         {/* Search and filter bar */}
