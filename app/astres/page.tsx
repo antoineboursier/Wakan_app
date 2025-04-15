@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Bell, ChevronRight, Lock, X, Plus, Camera, Upload } from "lucide-react"
 import { ButtonCustom } from "@/components/ui/button-custom"
+import PageBackground from "@/components/PageBackground"
 
 
 export default function AstresPage() {

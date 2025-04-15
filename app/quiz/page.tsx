@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { BookOpen } from "lucide-react"
 import { ButtonCustom } from "@/components/ui/button-custom"
+import PageBackground from "@/components/PageBackground"
 
 
 
