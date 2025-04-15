@@ -99,31 +99,27 @@ export default function WakanApp() {
            <div className="bg-[--background-900] rounded-xl p-4 flex flex-col items-center justify-center">
             <div className="relative w-20 h-20">
               {/* Cercle de fond */}
-              <div className="absolute inset-0 rounded-full" style={{ background: "conic-gradient(from 180deg at 50% 50%, var(--background-800) 360deg, transparent 0deg)" }} />
+              <div className="absolute inset-0 rounded-full" style={{
+                background: "conic-gradient(from 180deg at 50% 50%, var(--background-800) 360deg, transparent 0deg)"
+              }} />
 
-              {/* Cercle de progression */}
-              <div
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background: `conic-gradient(
-                    from 180deg at 50% 50%,
-                    var(--accent) ${(lunarData?.day_of_cycle ?? 0) * (360 / 29)}deg,
-                    transparent 0deg
-                  )`,
-                }}
-              />
+              {/* Cercle jaune */}
+              <div className="absolute inset-0 rounded-full" style={{
+                background: `conic-gradient(from 180deg at 50% 50%, var(--accent-900) ${(lunarData?.day_of_cycle ?? 0) / 29 * 360}deg, transparent 0deg)`
+              }} />
 
               {/* Contenu centré */}
               <div className="absolute inset-[6px] rounded-full bg-[--background-900] flex flex-col items-center justify-center text-center">
-                <h2 className="text-title_med text-[--text-primary] leading-none">
+                <h2 className="text-title-med text-[--text-primary] leading-none">
                   {lunarData?.day_of_cycle ? `J${lunarData.day_of_cycle}` : "—"}
                 </h2>
-                <p className="text-para_lit text-[--text-secondary] leading-tight">
+                <p className="text-para-lit text-[--text-secondary] leading-tight">
                   du cycle<br />lunaire
                 </p>
               </div>
             </div>
           </div>
+
 
 
 
