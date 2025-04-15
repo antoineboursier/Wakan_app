@@ -96,26 +96,35 @@ export default function WakanApp() {
           </div>
 
            {/* Day of lunar cycle 2 */}
-          <div className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center justify-center">
+           <div className="bg-[--background-900] rounded-xl p-4 flex flex-col items-center justify-center">
             <div className="relative w-20 h-20">
+              {/* Cercle de fond */}
+              <div className="absolute inset-0 rounded-full" style={{ background: "conic-gradient(from 180deg at 50% 50%, var(--background-800) 360deg, transparent 0deg)" }} />
+
+              {/* Cercle de progression */}
               <div
                 className="absolute inset-0 rounded-full"
                 style={{
-                  background: `conic-gradient(from 180deg at 50% 50%, #F6AE31 ${
-                    (lunarData?.day_of_cycle ?? 0) * (360 / 29)
-                  }deg, transparent 0deg)`,
+                  background: `conic-gradient(
+                    from 180deg at 50% 50%,
+                    var(--accent) ${(lunarData?.day_of_cycle ?? 0) * (360 / 29)}deg,
+                    transparent 0deg
+                  )`,
                 }}
-              ></div>
-              <div className="absolute inset-2 rounded-full bg-[#1C3039] flex flex-col items-center justify-center text-center">
-                <h2 className="text-2xl font-bold text-white leading-none">
+              />
+
+              {/* Contenu centré */}
+              <div className="absolute inset-[6px] rounded-full bg-[--background-900] flex flex-col items-center justify-center text-center">
+                <h2 className="text-title_med text-[--text-primary] leading-none">
                   {lunarData?.day_of_cycle ? `J${lunarData.day_of_cycle}` : "—"}
                 </h2>
-                <p className="text-[10px] text-[#cdbcae] leading-tight">
+                <p className="text-para_lit text-[--text-secondary] leading-tight">
                   du cycle<br />lunaire
                 </p>
               </div>
             </div>
           </div>
+
 
 
           {/* Lunar phase */}
