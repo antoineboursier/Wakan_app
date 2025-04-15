@@ -81,7 +81,9 @@ export default function WakanApp() {
         <div className="grid grid-cols-2 gap-4 w-full mb-6">
           {/* Day of lunar cycle */}
           <div className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center justify-center">
-            <h2 className="text-4xl font-bold mb-1">J2</h2>
+            <h2 className="text-4xl font-bold mb-1">
+              {lunarData?.day_of_cycle ? `J${lunarData.day_of_cycle}` : "—"}
+            </h2>
             <p className="text-center text-sm text-[#cdbcae]">
               du cycle
               <br />
@@ -105,8 +107,12 @@ export default function WakanApp() {
               <Moon className="w-5 h-5 text-[#f6df31]/50" />
               <Moon className="w-5 h-5 text-[#f6df31]/30" />
             </div>
-            <h2 className="text-2xl font-bold mt-2">Gibbeuse</h2>
-            <h3 className="text-2xl font-bold">décroissante</h3>
+            <h2 className="text-2xl font-bold mt-2">
+              {lunarData?.phase_name?.split(" ")[0] ?? "—"}
+            </h2>
+            <h3 className="text-2xl font-bold">
+              {lunarData?.phase_name?.split(" ").slice(1).join(" ") ?? ""}
+            </h3>
           </div>
 
           {/* Perigee/Apogee */}
@@ -134,14 +140,18 @@ export default function WakanApp() {
                 className="object-contain text-[#f6ae31]"
               />
             </div>
-            <h2 className="text-2xl font-bold">Scorpion</h2>
+            <h2 className="text-2xl font-bold">
+              {lunarData?.moon_sign ?? "—"}
+            </h2>
           </div>
 
           {/* Element */}
           <div className="bg-[#18272e] rounded-xl p-4 flex flex-row items-center justify-between">
             <div className="text-left">
               <p className="text-[#cdbcae]">Élément</p>
-              <h2 className="text-xl font-bold">Feu</h2>
+              <h2 className="text-xl font-bold">
+                {lunarData?.element ?? "—"}
+              </h2>
             </div>
             <div className="text-[#f6ae31]">
               <Image
