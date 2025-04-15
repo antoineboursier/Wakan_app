@@ -79,6 +79,7 @@ export default function WakanApp() {
 
         {/* Grid layout for cards */}
         <div className="grid grid-cols-2 gap-4 w-full mb-6">
+
           {/* Day of lunar cycle */}
           <div className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center justify-center">
             <h2 className="text-4xl font-bold mb-1">
@@ -93,6 +94,29 @@ export default function WakanApp() {
               <div className="w-full h-full rounded-full border-4 border-[#f6ae31] border-r-transparent"></div>
             </div>
           </div>
+
+           {/* Day of lunar cycle 2 */}
+          <div className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center justify-center">
+            <div className="relative w-20 h-20">
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: `conic-gradient(from 180deg at 50% 50%, #F6AE31 ${
+                    (lunarData?.day_of_cycle ?? 0) * (360 / 29)
+                  }deg, transparent 0deg)`,
+                }}
+              ></div>
+              <div className="absolute inset-2 rounded-full bg-[#1C3039] flex flex-col items-center justify-center text-center">
+                <h2 className="text-2xl font-bold text-white leading-none">
+                  {lunarData?.day_of_cycle ? `J${lunarData.day_of_cycle}` : "—"}
+                </h2>
+                <p className="text-[10px] text-[#cdbcae] leading-tight">
+                  du cycle<br />lunaire
+                </p>
+              </div>
+            </div>
+          </div>
+
 
           {/* Lunar phase */}
           <div className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center">
