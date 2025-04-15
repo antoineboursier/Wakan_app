@@ -6,39 +6,55 @@ import BottomNavigation from "@/components/bottom-navigation";
 import { ButtonCustom } from "@/components/ui/button-custom";
 import { supabase } from "@/lib/supabaseClient";
 import React, { useState, useEffect } from "react";
-import PageBackground from "@/components/PageBackground"
-
+import PageBackground from "@/components/PageBackground";
 
 export default function WakanApp() {
-
   //
-  // Récup des données pour supabase 
+  // Récup des données pour supabase
   //
 
   const [selectedDate, setSelectedDate] = useState(() => {
-    const today = new Date().toISOString().split("T")[0]
-    return today
-  })
-  const [lunarData, setLunarData] = useState(null)
-  
+    const today = new Date().toISOString().split("T")[0];
+    return today;
+  });
+  const [lunarData, setLunarData] = useState(null);
+  const [lunarDataMap, setLunarDataMap] = useState([]);
+
   useEffect(() => {
     const fetchLunarData = async () => {
       const { data, error } = await supabase
         .from("lunar_data")
         .select("*")
         .eq("date", selectedDate)
-        .maybeSingle()
-  
+        .maybeSingle();
+
       if (error) {
-        console.error("Erreur Supabase :", error)
-        setLunarData(null)
+        console.error("Erreur Supabase :", error);
+        setLunarData(null);
+        setLunarDataMap([]); // reset aussi la map en cas d’erreur
       } else {
-        setLunarData(data)
+        setLunarData(data);
+
+        // ⚠️ Nouvelle requête lancée uniquement si on a bien un day_of_cycle
+        if (typeof data?.day_of_cycle === "number") {
+          const { data: surroundingData, error: mapError } = await supabase
+            .from("lunar_data")
+            .select("day_of_cycle, phase_name")
+            .gte("day_of_cycle", data.day_of_cycle - 2)
+            .lte("day_of_cycle", data.day_of_cycle + 2);
+
+          if (mapError) {
+            console.error("Erreur récupération phases adjacentes :", mapError);
+            setLunarDataMap([]);
+          } else {
+            setLunarDataMap(surroundingData);
+          }
+        }
       }
-    }
-  
-    fetchLunarData()
-  }, [selectedDate])
+    };
+
+    fetchLunarData();
+  }, [selectedDate]);
 
   //
   // Content de la page
@@ -59,27 +75,30 @@ export default function WakanApp() {
             className="object-contain"
           />
         </div>
-        
-      {/*Calendrier */}
 
-      <input
-        type="date"
-        value={selectedDate}
-        onChange={(e) => setSelectedDate(e.target.value)}
-        className="text-black rounded px-3 py-2 mt-6 mb-4"
-      />
+        {/*Calendrier */}
+
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+          className="text-black rounded px-3 py-2 mt-6 mb-4"
+        />
 
         {/* Grid layout for cards */}
 
         <div className="grid grid-cols-2 gap-4 w-full mb-6">
-
-           {/* Day of lunar cycle */}
-           <div className="card-glass p-4 flex flex-col items-center justify-center">
+          {/* Day of lunar cycle */}
+          <div className="card-glass p-4 flex flex-col items-center justify-center">
             <div className="relative w-24 h-24">
               {/* Cercle de fond */}
-              <div className="absolute inset-0 rounded-full" style={{
-                background: "conic-gradient(from 180deg at 50% 50%, var(--background-800) 360deg, transparent 0deg)"
-              }} />
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background:
+                    "conic-gradient(from 180deg at 50% 50%, var(--background-800) 360deg, transparent 0deg)",
+                }}
+              />
 
               {/* Cercle jaune */}
               <div className="absolute inset-0 rounded-full">
@@ -101,7 +120,9 @@ export default function WakanApp() {
                       stroke="url(#grad)"
                       strokeWidth="6"
                       strokeLinecap="round"
-                      strokeDasharray={`${(lunarData.day_of_cycle / 29.5) * 282.6} 282.6`}
+                      strokeDasharray={`${
+                        (lunarData.day_of_cycle / 29.5) * 282.6
+                      } 282.6`}
                       transform="rotate(-90 50 50)"
                     />
                     <defs>
@@ -120,36 +141,74 @@ export default function WakanApp() {
                   {lunarData?.day_of_cycle ? `J${lunarData.day_of_cycle}` : "—"}
                 </h2>
                 <p className="text-para-lit text-[--text-secondary] leading-none">
-                  du cycle<br />lunaire
+                  du cycle
+                  <br />
+                  lunaire
                 </p>
               </div>
             </div>
           </div>
 
           {/* Lunar phase */}
-          <div className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center">
-            <p className="text-[#cdbcae] text-sm mb-2">Phase lunaire</p>
-            <p className="text-para-lit text-[--text-tertiary] mb-2">Phase lunaire</p>
-            <div className="flex justify-between w-full my-2">
-              <Moon className="w-5 h-5 text-[#f6df31]/30" />
-              <Moon className="w-5 h-5 text-[#f6df31]/50" />
-              <div className="relative">
-                <Moon className="w-5 h-5 text-[#f6df31]" />
-                <div className="absolute inset-0 border border-dashed border-[#f6ae31] rounded-full"></div>
-              </div>
-              <Moon className="w-5 h-5 text-[#f6df31]/50" />
-              <Moon className="w-5 h-5 text-[#f6df31]/30" />
+
+          <div
+            className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center"
+            style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)" }}
+          >
+            <p className="text-para-lit text-[--text-tertiary] mb-2">
+              Phase lunaire
+            </p>
+
+            {/* Bar d’icônes */}
+            <div className="flex justify-center items-center gap-[8px] w-full my-2">
+              {[...Array(5)].map((_, index) => {
+                if (!lunarData?.day_of_cycle) return null;
+
+                const offsets = [-2, -1, 0, 1, 2];
+                const targetDay = lunarData.day_of_cycle + offsets[index];
+
+                const sizes = [16, 20, 32, 20, 16];
+                const opacities = [0.3, 0.6, 1, 0.6, 0.3];
+
+                const matching = lunarDataMap?.find(
+                  (entry) => entry.day_of_cycle === targetDay
+                );
+
+                const phaseMap = {
+                  "Nouvelle Lune": "nouvellelune",
+                  Croissant: "1ercroissant",
+                  "Premier Quartier": "premierquartier",
+                  "Gibbeuse croissante": "lunegibbeuse1",
+                  "Pleine Lune": "pleinelune",
+                  "Gibbeuse décroissante": "lunegibbeuse2",
+                  "Dernier Quartier": "dernierquartier",
+                  "Dernier croissant": "derniercroissant",
+                };
+
+                const iconKey =
+                  phaseMap[matching?.phase_name ?? "Nouvelle Lune"];
+
+                return (
+                  <img
+                    key={index}
+                    src={`/moon_phases/${iconKey}.svg`}
+                    alt={iconKey}
+                    style={{
+                      height: `${sizes[index]}px`,
+                      opacity: opacities[index],
+                      filter:
+                        "drop-shadow(0px 2px 16px rgba(246, 223, 49, 0.80))",
+                    }}
+                  />
+                );
+              })}
             </div>
-            <h2 className="text-2xl font-bold mt-2">
+
+            {/* Texte de la phase */}
+            <h2 className="text-title_lit text-[--text-primary] mt-4 leading-none">
               {lunarData?.phase_name?.split(" ")[0] ?? "—"}
             </h2>
-            <h3 className="text-2xl font-bold">
-              {lunarData?.phase_name?.split(" ").slice(1).join(" ") ?? ""}
-            </h3>
-            <h2 className="text-title_lit text-[--text-primary] mt-2">
-              {lunarData?.phase_name?.split(" ")[0] ?? "—"}
-            </h2>
-            <h3 className="text-title_lit text-[--text-primary]">
+            <h3 className="text-title_lit text-[--text-primary] leading-none">
               {lunarData?.phase_name?.split(" ").slice(1).join(" ") ?? ""}
             </h3>
           </div>
@@ -168,7 +227,10 @@ export default function WakanApp() {
           </div>
 
           {/* Moon in Scorpio */}
-          <div className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center">
+          <div
+            className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center"
+            style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)" }}
+          >
             <p className="text-[#cdbcae] text-sm">Lune en</p>
             <div className="my-2">
               <Image
@@ -188,9 +250,7 @@ export default function WakanApp() {
           <div className="bg-[#18272e] rounded-xl p-4 flex flex-row items-center justify-between">
             <div className="text-left">
               <p className="text-[#cdbcae]">Élément</p>
-              <h2 className="text-xl font-bold">
-                {lunarData?.element ?? "—"}
-              </h2>
+              <h2 className="text-xl font-bold">{lunarData?.element ?? "—"}</h2>
             </div>
             <div className="text-[#f6ae31]">
               <Image
