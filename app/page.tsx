@@ -98,19 +98,35 @@ export default function WakanApp() {
 
               {/* Cercle jaune */}
               <div className="absolute inset-0 rounded-full">
-                <svg width="100%" height="100%" viewBox="0 0 100 100">
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="45"
-                    fill="none"
-                    stroke="var(--accent-900)"
-                    strokeWidth="10"
-                    strokeLinecap="round"
-                    strokeDasharray={`${(lunarData.day_of_cycle / 29.5) * 282.6} 282.6`}
-                    transform="rotate(-90 50 50)"
-                  />
-                </svg>
+                {typeof lunarData?.day_of_cycle === "number" && (
+                  <svg width="100%" height="100%" viewBox="0 0 100 100">
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      fill="none"
+                      stroke="var(--background-800)"
+                      strokeWidth="10"
+                    />
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      fill="none"
+                      stroke="url(#grad)"
+                      strokeWidth="10"
+                      strokeLinecap="round"
+                      strokeDasharray={`${(lunarData.day_of_cycle / 29.5) * 282.6} 282.6`}
+                      transform="rotate(-90 50 50)"
+                    />
+                    <defs>
+                      <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
+                        <stop offset="0%" stopColor="var(--accent-500)" />
+                        <stop offset="100%" stopColor="var(--accent-900)" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                )}
               </div>
 
               {/* Contenu */}
