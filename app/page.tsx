@@ -73,22 +73,7 @@ export default function WakanApp() {
 
         <div className="grid grid-cols-2 gap-4 w-full mb-6">
 
-          {/* Day of lunar cycle */}
-          <div className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center justify-center">
-            <h2 className="text-4xl font-bold mb-1">
-              {lunarData?.day_of_cycle ? `J${lunarData.day_of_cycle}` : "—"}
-            </h2>
-            <p className="text-center text-sm text-[#cdbcae]">
-              du cycle
-              <br />
-              lunaire
-            </p>
-            <div className="mt-2 w-16 h-16">
-              <div className="w-full h-full rounded-full border-4 border-[#f6ae31] border-r-transparent"></div>
-            </div>
-          </div>
-
-           {/* Day of lunar cycle 2 */}
+           {/* Day of lunar cycle */}
            <div className="card-glass p-4 flex flex-col items-center justify-center">
             <div className="relative w-24 h-24">
               {/* Cercle de fond */}
@@ -141,12 +126,10 @@ export default function WakanApp() {
             </div>
           </div>
 
-
-
-
           {/* Lunar phase */}
           <div className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center">
             <p className="text-[#cdbcae] text-sm mb-2">Phase lunaire</p>
+            <p className="text-para-lit text-[--text-tertiary] mb-2">Phase lunaire</p>
             <div className="flex justify-between w-full my-2">
               <Moon className="w-5 h-5 text-[#f6df31]/30" />
               <Moon className="w-5 h-5 text-[#f6df31]/50" />
@@ -161,6 +144,12 @@ export default function WakanApp() {
               {lunarData?.phase_name?.split(" ")[0] ?? "—"}
             </h2>
             <h3 className="text-2xl font-bold">
+              {lunarData?.phase_name?.split(" ").slice(1).join(" ") ?? ""}
+            </h3>
+            <h2 className="text-title_lit text-[--text-primary] mt-2">
+              {lunarData?.phase_name?.split(" ")[0] ?? "—"}
+            </h2>
+            <h3 className="text-title_lit text-[--text-primary]">
               {lunarData?.phase_name?.split(" ").slice(1).join(" ") ?? ""}
             </h3>
           </div>
