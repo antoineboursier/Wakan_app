@@ -90,7 +90,7 @@ export default function WakanApp() {
 
            {/* Day of lunar cycle 2 */}
            <div className="card-glass p-4 flex flex-col items-center justify-center">
-            <div className="relative w-20 h-20">
+            <div className="relative w-24 h-24">
               {/* Cercle de fond */}
               <div className="absolute inset-0 rounded-full" style={{
                 background: "conic-gradient(from 180deg at 50% 50%, var(--background-800) 360deg, transparent 0deg)"
@@ -106,7 +106,7 @@ export default function WakanApp() {
                       r="45"
                       fill="none"
                       stroke="var(--background-800)"
-                      strokeWidth="10"
+                      strokeWidth="6"
                     />
                     <circle
                       cx="50"
@@ -114,7 +114,7 @@ export default function WakanApp() {
                       r="45"
                       fill="none"
                       stroke="url(#grad)"
-                      strokeWidth="10"
+                      strokeWidth="6"
                       strokeLinecap="round"
                       strokeDasharray={`${(lunarData.day_of_cycle / 29.5) * 282.6} 282.6`}
                       transform="rotate(-90 50 50)"
