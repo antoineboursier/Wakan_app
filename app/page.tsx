@@ -6,6 +6,7 @@ import BottomNavigation from "@/components/bottom-navigation";
 import { ButtonCustom } from "@/components/ui/button-custom";
 import { supabase } from "@/lib/supabaseClient";
 import React, { useState, useEffect } from "react";
+import PageBackground from "@/components/PageBackground"
 
 export default function WakanApp() {
   const [lunarData, setLunarData] = useState(null);
@@ -34,29 +35,7 @@ export default function WakanApp() {
   return (
     <div className="relative flex flex-col items-center min-h-screen bg-gradient-to-b from-[#18272e] to-[#1c3039] text-white overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-[#253f4b]/30 blur-xl"></div>
-        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#18272e]/80 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 h-[400px] w-[100px]">
-          <Image
-            src="/placeholder.svg?height=400&width=100"
-            alt="Cactus silhouette"
-            width={100}
-            height={400}
-            className="object-contain"
-          />
-        </div>
-        <div className="absolute bottom-0 right-0 h-[400px] w-[100px]">
-          <Image
-            src="/placeholder.svg?height=400&width=100"
-            alt="Cactus silhouette"
-            width={100}
-            height={400}
-            className="object-contain"
-          />
-        </div>
-      </div>
-
+      <PageBackground imagePath="/backgrounds/home.png" />
       {/* Content container */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-md px-4 pt-10 pb-20">
         {/* Logo */}
