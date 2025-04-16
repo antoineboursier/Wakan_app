@@ -82,175 +82,182 @@ export default function WakanApp() {
           type="date"
           value={selectedDate}
           onChange={(e) => setSelectedDate(e.target.value)}
-          className="text-black rounded px-3 py-2 mt-6 mb-4"
+          className="text-black rounded px-3 py-2 mt-6 mb-6"
         />
 
         {/* Grid layout for cards */}
+        <div className="flex gap-2 w-full mb-6 items-stretch">
+          <div className="flex flex-col gap-1.5 w-1/2 h-full">
+            {/* Day of lunar cycle */}
+            <div className="card-glass p-4 flex flex-col items-center justify-center">
+              <div className="relative w-24 h-24">
+                {/* Cercle de fond */}
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background:
+                      "conic-gradient(from 180deg at 50% 50%, var(--background-800) 360deg, transparent 0deg)",
+                  }}
+                />
 
-        <div className="grid grid-cols-2 gap-4 w-full mb-6">
-          {/* Day of lunar cycle */}
-          <div className="card-glass p-4 flex flex-col items-center justify-center">
-            <div className="relative w-24 h-24">
-              {/* Cercle de fond */}
-              <div
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background:
-                    "conic-gradient(from 180deg at 50% 50%, var(--background-800) 360deg, transparent 0deg)",
-                }}
-              />
+                {/* Cercle jaune */}
+                <div className="absolute inset-0 rounded-full">
+                  {typeof lunarData?.day_of_cycle === "number" && (
+                    <svg width="100%" height="100%" viewBox="0 0 100 100">
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        fill="none"
+                        stroke="var(--background-800)"
+                        strokeWidth="6"
+                      />
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        fill="none"
+                        stroke="url(#grad)"
+                        strokeWidth="6"
+                        strokeLinecap="round"
+                        strokeDasharray={`${
+                          (lunarData.day_of_cycle / 29.5) * 282.6
+                        } 282.6`}
+                        transform="rotate(-90 50 50)"
+                      />
+                      <defs>
+                        <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
+                          <stop offset="0%" stopColor="var(--accent-500)" />
+                          <stop offset="100%" stopColor="var(--accent-900)" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  )}
+                </div>
 
-              {/* Cercle jaune */}
-              <div className="absolute inset-0 rounded-full">
-                {typeof lunarData?.day_of_cycle === "number" && (
-                  <svg width="100%" height="100%" viewBox="0 0 100 100">
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="45"
-                      fill="none"
-                      stroke="var(--background-800)"
-                      strokeWidth="6"
-                    />
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="45"
-                      fill="none"
-                      stroke="url(#grad)"
-                      strokeWidth="6"
-                      strokeLinecap="round"
-                      strokeDasharray={`${
-                        (lunarData.day_of_cycle / 29.5) * 282.6
-                      } 282.6`}
-                      transform="rotate(-90 50 50)"
-                    />
-                    <defs>
-                      <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
-                        <stop offset="0%" stopColor="var(--accent-500)" />
-                        <stop offset="100%" stopColor="var(--accent-900)" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                )}
+                {/* Contenu */}
+                <div className="absolute inset-[6px] rounded-full bg-[--background-900] flex flex-col items-center justify-center text-center">
+                  <h2 className="text-title-med text-[--text-primary] leading-none mb-1">
+                    {lunarData?.day_of_cycle
+                      ? `J ${lunarData.day_of_cycle}`
+                      : "—"}
+                  </h2>
+                  <p className="text-para-lit text-[--text-secondary] leading-none">
+                    du cycle
+                    <br />
+                    lunaire
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Perigee/Apogee */}
+            <div className="bg-[#18272e] rounded-xl p-4 flex flex-row items-center justify-between">
+              <div className="text-left">
+                <p className="text-para-lit text-[--text-secondary]">Périgée</p>
+              </div>
+              <div className="w-8 h-8 rounded-full bg-[#f6ae31] flex items-center justify-center">
+                <div className="w-6 h-6 rounded-full bg-[#18272e]"></div>
+              </div>
+              <div className="text-right">
+                <p className="text-para-lit text-[--text-secondary]">Apogée</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-1/2">
+            {/* Lunar phase */}
+            <div
+              className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center h-full justify-center"
+              style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)" }}
+            >
+              <p className="text-para-lit text-[--text-tertiary] mb-2">
+                Phase lunaire
+              </p>
+
+              {/* Bar d’icônes */}
+              <div className="flex justify-center items-center gap-[8px] w-full my-2">
+                {[...Array(5)].map((_, index) => {
+                  if (!lunarData?.day_of_cycle) return null;
+
+                  const offsets = [-2, -1, 0, 1, 2];
+                  const targetDay = lunarData.day_of_cycle + offsets[index];
+
+                  const sizes = [16, 20, 36, 20, 16];
+                  const opacities = [0.2, 0.6, 1, 0.6, 0.2];
+
+                  const matching = lunarDataMap?.find(
+                    (entry) => entry.day_of_cycle === targetDay
+                  );
+
+                  const phaseMap = {
+                    "Nouvelle Lune": "nouvellelune",
+                    Croissant: "1ercroissant",
+                    "Premier Quartier": "premierquartier",
+                    "Gibbeuse croissante": "lunegibbeuse1",
+                    "Pleine Lune": "pleinelune",
+                    "Gibbeuse décroissante": "lunegibbeuse2",
+                    "Dernier Quartier": "dernierquartier",
+                    "Dernier croissant": "derniercroissant",
+                  };
+
+                  const iconKey =
+                    phaseMap[matching?.phase_name ?? "Nouvelle Lune"];
+
+                  const isCurrent = index === 2;
+
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-center justify-center"
+                      style={
+                        isCurrent
+                          ? {
+                              width: sizes[index],
+                              height: sizes[index],
+                              borderRadius: "50%",
+                              border: "1px dashed var(--accent-900)",
+                              padding: "4px",
+                              filter:
+                                "drop-shadow(0px 2px 16px rgba(246, 223, 49, 0.80))",
+                            }
+                          : {}
+                      }
+                    >
+                      <img
+                        src={`/moon_phases/${iconKey}.svg`}
+                        alt={iconKey}
+                        style={{
+                          height: `${sizes[index]}px`,
+                          width: `${sizes[index]}px`,
+                          opacity: opacities[index],
+                          filter:
+                            "drop-shadow(0px 2px 16px rgba(246, 223, 49, 0.80))",
+                        }}
+                      />
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Contenu */}
-              <div className="absolute inset-[6px] rounded-full bg-[--background-900] flex flex-col items-center justify-center text-center">
-                <h2 className="text-title-med text-[--text-primary] leading-none mb-1">
-                  {lunarData?.day_of_cycle ? `J${lunarData.day_of_cycle}` : "—"}
-                </h2>
-                <p className="text-para-lit text-[--text-secondary] leading-none">
-                  du cycle
-                  <br />
-                  lunaire
-                </p>
-              </div>
+              {/* Texte de la phase */}
+              <h2 className="text-title_lit text-[--text-primary] mt-4 leading-none">
+                {lunarData?.phase_name?.split(" ")[0] ?? "—"}
+              </h2>
+              <h3 className="text-title_lit text-[--text-primary] leading-none">
+                {lunarData?.phase_name?.split(" ").slice(1).join(" ") ?? ""}
+              </h3>
             </div>
           </div>
+        </div>
 
-          {/* Lunar phase */}
-          <div
-            className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center"
-            style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)" }}
-          >
-            <p className="text-para-lit text-[--text-tertiary] mb-2">
-              Phase lunaire
-            </p>
-
-            {/* Bar d’icônes */}
-            <div className="flex justify-center items-center gap-[8px] w-full my-2">
-              {[...Array(5)].map((_, index) => {
-                if (!lunarData?.day_of_cycle) return null;
-
-                const offsets = [-2, -1, 0, 1, 2];
-                const targetDay = lunarData.day_of_cycle + offsets[index];
-
-                const sizes = [16, 20, 36, 20, 16];
-                const opacities = [0.2, 0.6, 1, 0.6, 0.2];
-
-                const matching = lunarDataMap?.find(
-                  (entry) => entry.day_of_cycle === targetDay
-                );
-
-                const phaseMap = {
-                  "Nouvelle Lune": "nouvellelune",
-                  Croissant: "1ercroissant",
-                  "Premier Quartier": "premierquartier",
-                  "Gibbeuse croissante": "lunegibbeuse1",
-                  "Pleine Lune": "pleinelune",
-                  "Gibbeuse décroissante": "lunegibbeuse2",
-                  "Dernier Quartier": "dernierquartier",
-                  "Dernier croissant": "derniercroissant",
-                };
-
-                const iconKey =
-                  phaseMap[matching?.phase_name ?? "Nouvelle Lune"];
-
-                const isCurrent = index === 2;
-
-                return (
-                  <div
-                    key={index}
-                    className="flex items-center justify-center"
-                    style={
-                      isCurrent
-                        ? {
-                            width: sizes[index],
-                            height: sizes[index],
-                            borderRadius: "50%",
-                            border: "1px dashed var(--accent-900)",
-                            padding: "4px",
-                            filter:
-                              "drop-shadow(0px 2px 16px rgba(246, 223, 49, 0.80))",
-                          }
-                        : {}
-                    }
-                  >
-                    <img
-                      src={`/moon_phases/${iconKey}.svg`}
-                      alt={iconKey}
-                      style={{
-                        height: `${sizes[index]}px`,
-                        width: `${sizes[index]}px`,
-                        opacity: opacities[index],
-                        filter:
-                          "drop-shadow(0px 2px 16px rgba(246, 223, 49, 0.80))",
-                      }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Texte de la phase */}
-            <h2 className="text-title_lit text-[--text-primary] mt-4 leading-none">
-              {lunarData?.phase_name?.split(" ")[0] ?? "—"}
-            </h2>
-            <h3 className="text-title_lit text-[--text-primary] leading-none">
-              {lunarData?.phase_name?.split(" ").slice(1).join(" ") ?? ""}
-            </h3>
-          </div>
-
-          {/* Perigee/Apogee */}
-          <div className="bg-[#18272e] rounded-xl p-4 flex flex-row items-center justify-between">
-            <div className="text-left">
-              <p className="text-[#cdbcae]">Périgée</p>
-            </div>
-            <div className="w-8 h-8 rounded-full bg-[#f6ae31] flex items-center justify-center">
-              <div className="w-6 h-6 rounded-full bg-[#18272e]"></div>
-            </div>
-            <div className="text-right">
-              <p className="text-[#cdbcae]">Apogée</p>
-            </div>
-          </div>
-
+        <div className="grid grid-cols-2 gap-2 w-full mb-8">
           {/* Moon in Scorpio */}
           <div
             className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center"
             style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)" }}
           >
-            <p className="text-[#cdbcae] text-sm">Lune en</p>
+            <p className="text-para-lit text-[--text-secondary]">Lune en</p>
             <div className="my-2">
               <Image
                 src="/placeholder.svg?height=40&width=40"
@@ -260,7 +267,7 @@ export default function WakanApp() {
                 className="object-contain text-[#f6ae31]"
               />
             </div>
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-title-lit text-[--text-primary]">
               {lunarData?.moon_sign ?? "—"}
             </h2>
           </div>
@@ -268,8 +275,10 @@ export default function WakanApp() {
           {/* Element */}
           <div className="bg-[#18272e] rounded-xl p-4 flex flex-row items-center justify-between">
             <div className="text-left">
-              <p className="text-[#cdbcae]">Élément</p>
-              <h2 className="text-xl font-bold">{lunarData?.element ?? "—"}</h2>
+              <p className="text-para-lit text-[--text-secondary]">Élément</p>
+              <h2 className="text-title-lit text-[--text-primary]">
+                {lunarData?.element ?? "—"}
+              </h2>
             </div>
             <div className="text-[#f6ae31]">
               <Image
@@ -281,27 +290,10 @@ export default function WakanApp() {
               />
             </div>
           </div>
-
-          {/* Node */}
-          <div className="bg-[#18272e] rounded-xl p-4 flex flex-row items-center justify-between">
-            <div className="text-left">
-              <p className="text-[#cdbcae]">Noeud</p>
-              <h2 className="text-xl font-bold">Capricorne</h2>
-            </div>
-            <div className="text-[#f6ae31]">
-              <Image
-                src="/placeholder.svg?height=30&width=30"
-                alt="Capricorn symbol"
-                width={30}
-                height={30}
-                className="object-contain"
-              />
-            </div>
-          </div>
         </div>
 
         {/* Astro du jour button */}
-        <ButtonCustom variant="primary" className="text-button">
+        <ButtonCustom variant="primary" className="text-button mb-2">
           Astro du jour
           <Sun className="ml-2 w-6 h-6" />
         </ButtonCustom>
