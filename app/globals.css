@@ -80,7 +80,15 @@
     --sizes-4xl: 56px;
 
     /* Dégradés */
-    --accent_gradient: linear-gradient(180deg, var(--accent-700) 2.04%, #f4930b 100%);
+    --accent_gradient: linear-gradient(
+      180deg,
+      var(--accent-700) 2.04%,
+      #f4930b 100%
+    );
+
+    /* Couleurs diverses */
+
+    --rich-yellow: #f6df31;
   }
 
   * {
@@ -93,7 +101,12 @@
     font-family: "League Spartan", sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: "Skranji", cursive;
   }
 }
@@ -187,8 +200,7 @@
     border-radius: var(--sizes-m);
     border: 1px solid var(--accent-500);
     background: var(--accent_gradient);
-    box-shadow:
-      0px 2px 2px 0px rgba(24, 39, 46, 0.4),
+    box-shadow: 0px 2px 2px 0px rgba(24, 39, 46, 0.4),
       0px 8px 32px 0px rgba(246, 174, 49, 0.6),
       0px 2px 1px 0px rgba(244, 239, 235, 0.5) inset,
       0px -2px 1px 0px rgba(24, 39, 46, 0.5) inset;
@@ -206,8 +218,7 @@
     border-radius: var(--sizes-m);
     border: 1px solid var(--accent-disabled);
     background: var(--accent-disabled);
-    box-shadow:
-      0px 2px 2px 0px rgba(24, 39, 46, 0.4),
+    box-shadow: 0px 2px 2px 0px rgba(24, 39, 46, 0.4),
       0px 2px 1px 0px rgba(244, 239, 235, 0.5) inset,
       0px -2px 1px 0px rgba(24, 39, 46, 0.5) inset;
     color: var(--accent_text-on-disabled);
@@ -222,8 +233,7 @@
     border-radius: var(--sizes-m);
     border: 1px solid var(--accent-700);
     background: var(--background-800);
-    box-shadow:
-      0px 2px 1px 0px rgba(244, 239, 235, 0.2) inset,
+    box-shadow: 0px 2px 1px 0px rgba(244, 239, 235, 0.2) inset,
       0px -2px 1px 0px rgba(24, 39, 46, 0.2) inset;
     color: var(--text-primary);
     font-family: "League Spartan", sans-serif;
@@ -239,8 +249,7 @@
     border-radius: var(--sizes-m);
     border: 1px solid var(--accent-disabled);
     background: var(--background-800);
-    box-shadow:
-      0px 2px 1px 0px rgba(244, 239, 235, 0.2) inset,
+    box-shadow: 0px 2px 1px 0px rgba(244, 239, 235, 0.2) inset,
       0px -2px 1px 0px rgba(24, 39, 46, 0.2) inset;
     color: var(--text-disabled);
     cursor: not-allowed;

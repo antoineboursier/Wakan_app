@@ -150,7 +150,6 @@ export default function WakanApp() {
           </div>
 
           {/* Lunar phase */}
-
           <div
             className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center"
             style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)" }}
@@ -167,8 +166,8 @@ export default function WakanApp() {
                 const offsets = [-2, -1, 0, 1, 2];
                 const targetDay = lunarData.day_of_cycle + offsets[index];
 
-                const sizes = [16, 20, 32, 20, 16];
-                const opacities = [0.3, 0.6, 1, 0.6, 0.3];
+                const sizes = [16, 20, 36, 20, 16];
+                const opacities = [0.2, 0.6, 1, 0.6, 0.2];
 
                 const matching = lunarDataMap?.find(
                   (entry) => entry.day_of_cycle === targetDay
@@ -188,18 +187,38 @@ export default function WakanApp() {
                 const iconKey =
                   phaseMap[matching?.phase_name ?? "Nouvelle Lune"];
 
+                const isCurrent = index === 2;
+
                 return (
-                  <img
+                  <div
                     key={index}
-                    src={`/moon_phases/${iconKey}.svg`}
-                    alt={iconKey}
-                    style={{
-                      height: `${sizes[index]}px`,
-                      opacity: opacities[index],
-                      filter:
-                        "drop-shadow(0px 2px 16px rgba(246, 223, 49, 0.80))",
-                    }}
-                  />
+                    className="flex items-center justify-center"
+                    style={
+                      isCurrent
+                        ? {
+                            width: sizes[index],
+                            height: sizes[index],
+                            borderRadius: "50%",
+                            border: "1px dashed var(--accent-900)",
+                            padding: "4px",
+                            filter:
+                              "drop-shadow(0px 2px 16px rgba(246, 223, 49, 0.80))",
+                          }
+                        : {}
+                    }
+                  >
+                    <img
+                      src={`/moon_phases/${iconKey}.svg`}
+                      alt={iconKey}
+                      style={{
+                        height: `${sizes[index]}px`,
+                        width: `${sizes[index]}px`,
+                        opacity: opacities[index],
+                        filter:
+                          "drop-shadow(0px 2px 16px rgba(246, 223, 49, 0.80))",
+                      }}
+                    />
+                  </div>
                 );
               })}
             </div>
