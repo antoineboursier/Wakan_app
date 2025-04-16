@@ -66,7 +66,7 @@ export default function WakanApp() {
       {/* Content container */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-md px-4 pt-10 pb-20">
         {/* Logo */}
-        <div className="relative w-[114px] h-[104px]">
+        <div className="relative w-[150px] h-[136px]">
           <Image
             src="/logo_app.svg"
             alt="Logo"
@@ -76,14 +76,40 @@ export default function WakanApp() {
           />
         </div>
 
-        {/*Calendrier */}
+        {/* Calendrier avec flèches */}
+        <div className="flex items-center gap-2 mt-6 mb-6">
+          {/* Bouton précédent */}
+          <button
+            onClick={() => {
+              const newDate = new Date(selectedDate);
+              newDate.setDate(newDate.getDate() - 1);
+              setSelectedDate(newDate.toISOString().split("T")[0]);
+            }}
+            className="text-white text-xl px-2"
+          >
+            &lt;
+          </button>
 
-        <input
-          type="date"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-          className="text-black rounded px-3 py-2 mt-6 mb-6"
-        />
+          {/* Sélecteur de date */}
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="text-black rounded px-3 py-2"
+          />
+
+          {/* Bouton suivant */}
+          <button
+            onClick={() => {
+              const newDate = new Date(selectedDate);
+              newDate.setDate(newDate.getDate() + 1);
+              setSelectedDate(newDate.toISOString().split("T")[0]);
+            }}
+            className="text-white text-xl px-2"
+          >
+            &gt;
+          </button>
+        </div>
 
         {/* Grid layout for cards */}
         <div className="flex gap-2 w-full mb-6 items-stretch">
@@ -152,21 +178,58 @@ export default function WakanApp() {
             </div>
 
             {/* Perigee/Apogee */}
-            <div className="bg-[#18272e] rounded-xl p-4 flex flex-row items-center justify-between">
-              <div className="text-left">
-                <p className="text-para-lit text-[--text-secondary]">Périgée</p>
+            <div className="card-glass p-4 flex flex-col justify-between h-[80px]">
+              {/* Ligne du haut avec textes */}
+              <div className="flex justify-between items-center w-full px-1 text-para-lit text-[--text-secondary]">
+                <span>Périgée</span>
+                <span>Apogée</span>
               </div>
-              <div className="w-8 h-8 rounded-full bg-[#f6ae31] flex items-center justify-center">
-                <div className="w-6 h-6 rounded-full bg-[#18272e]"></div>
-              </div>
-              <div className="text-right">
-                <p className="text-para-lit text-[--text-secondary]">Apogée</p>
+
+              {/* Triangle + curseur */}
+              <div className="relative w-full h-6 mt-1">
+                {/* Triangle inversé */}
+                <svg
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 100 16"
+                  preserveAspectRatio="none"
+                >
+                  <polygon
+                    points="100,8 0,0 0,16"
+                    fill="var(--background-900)"
+                  />
+                </svg>
+
+                {/* Curseur */}
+                {typeof lunarData?.distance_ratio === "number" &&
+                  (() => {
+                    const ratio = lunarData.distance_ratio;
+                    const percent = (100 + (ratio - 75) * 2) % 100;
+                    const size = 12 + ((100 - ratio) / 100) * 4;
+
+                    return (
+                      <div
+                        className="absolute top-1/2 z-10 rounded-full"
+                        style={{
+                          left: `${percent}%`,
+                          width: `${size}px`,
+                          height: `${size}px`,
+                          backgroundColor: "rgba(246, 174, 49, 0.4)",
+                          border: "1px solid var(--rich-yellow, #F6DF31)",
+                          transform: "translate(-50%, -50%)",
+                        }}
+                      />
+                    );
+                  })()}
               </div>
             </div>
+            {/* Fin de bloc */}
           </div>
 
           <div className="w-1/2">
             {/* Lunar phase */}
+
             <div
               className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center h-full justify-center"
               style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)" }}
@@ -257,7 +320,6 @@ export default function WakanApp() {
             className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center"
             style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)" }}
           >
-            <p className="text-para-lit text-[--text-secondary]">Lune en</p>
             <div className="my-2">
               <Image
                 src="/placeholder.svg?height=40&width=40"
@@ -267,6 +329,7 @@ export default function WakanApp() {
                 className="object-contain text-[#f6ae31]"
               />
             </div>
+            <p className="text-para-lit text-[--text-secondary]">Lune en</p>
             <h2 className="text-title-lit text-[--text-primary]">
               {lunarData?.moon_sign ?? "—"}
             </h2>
