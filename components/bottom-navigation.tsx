@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, BookOpen, HelpCircle, Star, FileText } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 export default function BottomNavigation() {
   const pathname = usePathname();
@@ -38,7 +38,7 @@ export default function BottomNavigation() {
             opacity: getActive("/") ? 1 : 0.7,
           }}
         >
-          <Home className="w-6 h-6 mb-1" />
+          <Icon icon="ph:tipi-bold" className="w-6 h-6 mb-1" />
           <span className="text-tabbar">Accueil</span>
         </Link>
         <Link
@@ -51,7 +51,10 @@ export default function BottomNavigation() {
             opacity: getActive("/tirages") ? 1 : 0.7,
           }}
         >
-          <BookOpen className="w-6 h-6 mb-1" />
+          <Icon
+            icon="mdi:cards-playing-heart-multiple"
+            className="w-6 h-6 mb-1"
+          />
           <span className="text-tabbar">Tirages</span>
         </Link>
         <Link
@@ -64,7 +67,7 @@ export default function BottomNavigation() {
             opacity: getActive("/quiz") ? 1 : 0.7,
           }}
         >
-          <HelpCircle className="w-6 h-6 mb-1" />
+          <Icon icon="material-symbols:quiz" className="w-6 h-6 mb-1" />
           <span className="text-tabbar">Quiz</span>
         </Link>
         <Link
@@ -77,7 +80,7 @@ export default function BottomNavigation() {
             opacity: getActive("/astres") ? 1 : 0.7,
           }}
         >
-          <Star className="w-6 h-6 mb-1" />
+          <Icon icon="solar:star-bold-duotone" className="w-6 h-6 mb-1" />
           <span className="text-tabbar">Mon astro</span>
         </Link>
         <Link
@@ -90,7 +93,7 @@ export default function BottomNavigation() {
             opacity: getActive("/journal") ? 1 : 0.7,
           }}
         >
-          <FileText className="w-6 h-6 mb-1" />
+          <Icon icon="fa-solid:book" className="w-6 h-6 mb-1" />
           <span className="text-tabbar">Journal</span>
         </Link>
       </div>

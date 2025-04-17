@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { Sun, Moon } from "lucide-react";
-import BottomNavigation from "@/components/bottom-navigation";
 import { ButtonCustom } from "@/components/ui/button-custom";
 import { supabase } from "@/lib/supabaseClient";
 import React, { useState, useEffect } from "react";
 import PageBackground from "@/components/PageBackground";
+import { Icon } from "@iconify/react";
+import PremiumCard from "@/components/PremiumCard";
 
 export default function WakanApp() {
   //
@@ -370,7 +370,7 @@ export default function WakanApp() {
         {/* Astro du jour button */}
         <ButtonCustom variant="primary" className="text-button mb-2">
           Astro du jour
-          <Sun className="ml-2 w-6 h-6" />
+          <Icon icon="fa-solid:sun" className="w-6 h-6" />
         </ButtonCustom>
 
         {/* Free draws counter */}
@@ -388,40 +388,8 @@ export default function WakanApp() {
           />
         </div>
 
-        {/* Premium access card */}
-        <div className="w-full border-2 border-dashed border-[--accent-900] rounded-xl p-4 mb-8">
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="text-[--text-secondary] mb-1">Accès premium</p>
-              <h3 className="text-2xl font-bold text-[--accent-900]">
-                2€/mois
-              </h3>
-              <p className="text-[--accent-700] font-bold mb-1">
-                Débloque tout, sans mauvaise surprise.
-              </p>
-              <p className="text-[--accent-500] text-para">
-                Et bien sûr, c'est sans engagement.
-              </p>
-            </div>
-            <div className="bg-white rounded-full p-2">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 12H19M19 12L12 5M19 12L12 19"
-                  stroke="#18272e"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
+        {/* Card premium access */}
+        <PremiumCard />
       </div>
     </div>
   );
