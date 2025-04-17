@@ -4,7 +4,7 @@
         <animate
             attributeName="r"
             values="10.75;13.25;10.75"
-            dur="20s"
+            dur="16s"
             repeatCount="indefinite"
         />
     </circle>
@@ -13,7 +13,7 @@
         <animate
             attributeName="r"
             values="14.25;6.75;14.25"
-            dur="10s"
+            dur="8s"
             repeatCount="indefinite"
         />
     </circle>
@@ -22,7 +22,7 @@
       <animate
             attributeName="r"
             values="2.5;4;2.5"
-            dur="10s"
+            dur="6s"
             repeatCount="indefinite"
         />
     </circle>
@@ -34,7 +34,7 @@
             type="rotate"
             from="0 30 19.0618"
             to="360 30 19.0618"
-            dur="100s"
+            dur="40s"
             repeatCount="indefinite"
         />
     </circle>

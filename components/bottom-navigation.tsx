@@ -35,7 +35,7 @@ export default function BottomNavigation() {
             color: getActive("/")
               ? "var(--text-primary)"
               : "var(--text-secondary)",
-            opacity: getActive("/") ? 1 : 0.5,
+            opacity: getActive("/") ? 1 : 0.7,
           }}
         >
           <Home className="w-6 h-6 mb-1" />
@@ -48,7 +48,7 @@ export default function BottomNavigation() {
             color: getActive("/tirages")
               ? "var(--text-primary)"
               : "var(--text-secondary)",
-            opacity: getActive("/tirages") ? 1 : 0.5,
+            opacity: getActive("/tirages") ? 1 : 0.7,
           }}
         >
           <BookOpen className="w-6 h-6 mb-1" />
@@ -61,7 +61,7 @@ export default function BottomNavigation() {
             color: getActive("/quiz")
               ? "var(--text-primary)"
               : "var(--text-secondary)",
-            opacity: getActive("/quiz") ? 1 : 0.5,
+            opacity: getActive("/quiz") ? 1 : 0.7,
           }}
         >
           <HelpCircle className="w-6 h-6 mb-1" />
@@ -74,11 +74,11 @@ export default function BottomNavigation() {
             color: getActive("/astres")
               ? "var(--text-primary)"
               : "var(--text-secondary)",
-            opacity: getActive("/astres") ? 1 : 0.5,
+            opacity: getActive("/astres") ? 1 : 0.7,
           }}
         >
           <Star className="w-6 h-6 mb-1" />
-          <span className="text-tabbar">Astres</span>
+          <span className="text-tabbar">Mon astro</span>
         </Link>
         <Link
           href="/journal"
@@ -87,7 +87,7 @@ export default function BottomNavigation() {
             color: getActive("/journal")
               ? "var(--text-primary)"
               : "var(--text-secondary)",
-            opacity: getActive("/journal") ? 1 : 0.5,
+            opacity: getActive("/journal") ? 1 : 0.7,
           }}
         >
           <FileText className="w-6 h-6 mb-1" />

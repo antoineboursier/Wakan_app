@@ -278,7 +278,9 @@ export default function WakanApp() {
                   return (
                     <div
                       key={index}
-                      className="flex items-center justify-center"
+                      className={`flex items-center justify-center ${
+                        isCurrent ? "moon-glow" : ""
+                      }`}
                       style={
                         isCurrent
                           ? {
