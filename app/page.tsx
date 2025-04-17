@@ -121,7 +121,10 @@ export default function WakanApp() {
         <div className="flex gap-2 w-full mb-6 items-stretch">
           <div className="flex flex-col gap-1.5 w-1/2 h-full">
             {/* Day of lunar cycle */}
-            <div className="card-glass p-4 flex flex-col items-center justify-center">
+            <div
+              className="card-glass p-4 flex flex-col items-center justify-center fade-in-up"
+              style={{ animationDelay: "0.2s" }}
+            >
               <div className="relative w-24 h-24">
                 {/* Cercle jaune */}
                 <div className="absolute inset-0 rounded-full">
@@ -175,7 +178,10 @@ export default function WakanApp() {
             </div>
 
             {/* Perigee/Apogee */}
-            <div className="card-glass p-4 flex flex-col justify-between">
+            <div
+              className="card-glass p-4 flex flex-col justify-between fade-in-up"
+              style={{ animationDelay: "0.4s" }}
+            >
               {/* Légendes + triangle */}
               <div className="flex justify-between items-center w-full text-para-lit gap-2">
                 {/* Périgée */}
@@ -237,8 +243,11 @@ export default function WakanApp() {
             {/* Lunar phase */}
 
             <div
-              className="bg-[--background-900] rounded-xl p-4 flex flex-col items-center h-full justify-center"
-              style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.2)" }}
+              className="bg-[--background-900] rounded-xl p-4 flex flex-col items-center h-full justify-center fade-in-up"
+              style={{
+                boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.2)",
+                animationDelay: "0.3s",
+              }}
             >
               <p className="text-para-lit text-[--text-tertiary] mb-2">
                 Phase lunaire
@@ -325,9 +334,10 @@ export default function WakanApp() {
         <div className="grid grid-cols-2 gap-2 w-full mb-8">
           {/* Lunar Zodiac */}
           <div
-            className="bg-[--background-800] rounded-xl p-4 flex flex-col items-center"
+            className="bg-[--background-800] rounded-xl p-4 flex flex-col items-center fade-in-up"
             style={{
               boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.2)",
+              animationDelay: "0.6s",
             }}
           >
             <div className="my-2">
@@ -348,7 +358,10 @@ export default function WakanApp() {
           </div>
 
           {/* Lunar element */}
-          <div className="card-glass rounded-xl p-4 flex flex-col items-center">
+          <div
+            className="card-glass rounded-xl p-4 flex flex-col items-center fade-in-up"
+            style={{ animationDelay: "0.7s" }}
+          >
             <div className="my-2">
               {lunarData?.element && (
                 <Image
