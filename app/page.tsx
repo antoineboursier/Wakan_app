@@ -179,51 +179,54 @@ export default function WakanApp() {
 
             {/* Perigee/Apogee */}
             <div className="card-glass p-4 flex flex-col justify-between h-[80px]">
-              {/* Ligne du haut avec textes */}
-              <div className="flex justify-between items-center w-full px-1 text-para-lit text-[--text-secondary]">
+              {/* Légendes + triangle */}
+              <div className="flex justify-between items-center w-full mb-1 px-1 text-para-lit text-[--text-secondary] gap-2">
                 <span>Périgée</span>
+
+                {/* Conteneur relatif pour le triangle + le cercle */}
+                <div className="relative flex-1 h-4 mx-2">
+                  {/* Triangle inversé (base à gauche, pointe à droite) */}
+                  <svg
+                    className="absolute inset-0 w-full h-full"
+                    viewBox="0 0 100 16"
+                    preserveAspectRatio="none"
+                  >
+                    {/* ici point A=100,8 (milieu côté large), B=0,0, C=0,16 */}
+                    <polygon
+                      points="100,8 0,0 0,16"
+                      fill="var(--background-900)"
+                    />
+                  </svg>
+
+                  {/* Cercle dynamique au‑dessus */}
+                  {typeof lunarData?.distance_ratio === "number" &&
+                    (() => {
+                      const ratio = lunarData.distance_ratio; // 0 à 100
+                      const circleSize = 10 + ((100 - ratio) / 100) * 4; // 12 → 16px
+
+                      return (
+                        <div
+                          className="absolute top-1/2 z-10 rounded-full"
+                          style={{
+                            // on positionne de 0% (left) à 100% en fonction du ratio
+                            left: `${ratio}%`,
+                            width: `${circleSize}px`,
+                            height: `${circleSize}px`,
+                            backgroundColor: "rgba(246, 174, 49, 0.4)",
+                            border: "1px solid var(--rich-yellow, #F6DF31)",
+                            aspectRatio: "1 / 1",
+                            // on recentre parfaitement le cercle sur son point
+                            transform: "translate(-50%, -50%)",
+                          }}
+                        />
+                      );
+                    })()}
+                </div>
+
                 <span>Apogée</span>
               </div>
-
-              {/* Triangle + curseur */}
-              <div className="relative w-full h-6 mt-1">
-                {/* Triangle inversé */}
-                <svg
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                  width="100%"
-                  height="100%"
-                  viewBox="0 0 100 16"
-                  preserveAspectRatio="none"
-                >
-                  <polygon
-                    points="100,8 0,0 0,16"
-                    fill="var(--background-900)"
-                  />
-                </svg>
-
-                {/* Curseur */}
-                {typeof lunarData?.distance_ratio === "number" &&
-                  (() => {
-                    const ratio = lunarData.distance_ratio;
-                    const percent = (100 + (ratio - 75) * 2) % 100;
-                    const size = 12 + ((100 - ratio) / 100) * 4;
-
-                    return (
-                      <div
-                        className="absolute top-1/2 z-10 rounded-full"
-                        style={{
-                          left: `${percent}%`,
-                          width: `${size}px`,
-                          height: `${size}px`,
-                          backgroundColor: "rgba(246, 174, 49, 0.4)",
-                          border: "1px solid var(--rich-yellow, #F6DF31)",
-                          transform: "translate(-50%, -50%)",
-                        }}
-                      />
-                    );
-                  })()}
-              </div>
             </div>
+
             {/* Fin de bloc */}
           </div>
 
