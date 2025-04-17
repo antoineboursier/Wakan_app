@@ -14,7 +14,7 @@ export default function BottomNavigation() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-20"
+      className="fixed bottom-0 left-0 right-0 z-20 px-8"
       style={{
         borderRadius: "var(--sizes-m, 16px)",
         background:
@@ -22,9 +22,9 @@ export default function BottomNavigation() {
         boxShadow:
           "0px var(--sizes-sm, 12px) var(--sizes-xl, 32px) 0px var(--background-900, #18272E)",
         textAlign: "center",
-        padding: "var(--sizes-s, 8px)",
         maxWidth: "600px",
         margin: "0 auto 16px",
+        width: "calc(100% - 16px)",
       }}
     >
       <div className="flex justify-between items-center max-w-md mx-auto">

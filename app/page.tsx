@@ -19,6 +19,9 @@ export default function WakanApp() {
   });
   const [lunarData, setLunarData] = useState(null);
   const [lunarDataMap, setLunarDataMap] = useState([]);
+  const ratio = lunarData?.distance_ratio ?? 50;
+  const isPerigee = ratio < 10;
+  const isApogee = ratio > 99;
 
   useEffect(() => {
     const fetchLunarData = async () => {
@@ -35,7 +38,7 @@ export default function WakanApp() {
       } else {
         setLunarData(data);
 
-        // ⚠️ Nouvelle requête lancée uniquement si on a bien un day_of_cycle
+        // Nouvelle requête lancée uniquement si on a bien un day_of_cycle
         if (typeof data?.day_of_cycle === "number") {
           const { data: surroundingData, error: mapError } = await supabase
             .from("lunar_data")
@@ -86,6 +89,7 @@ export default function WakanApp() {
               setSelectedDate(newDate.toISOString().split("T")[0]);
             }}
             className="text-white text-xl px-2"
+            aria-label="Jour précédent"
           >
             &lt;
           </button>
@@ -106,26 +110,19 @@ export default function WakanApp() {
               setSelectedDate(newDate.toISOString().split("T")[0]);
             }}
             className="text-white text-xl px-2"
+            aria-label="Jour suivant"
           >
             &gt;
           </button>
         </div>
 
         {/* Grid layout for cards */}
+
         <div className="flex gap-2 w-full mb-6 items-stretch">
           <div className="flex flex-col gap-1.5 w-1/2 h-full">
             {/* Day of lunar cycle */}
             <div className="card-glass p-4 flex flex-col items-center justify-center">
               <div className="relative w-24 h-24">
-                {/* Cercle de fond */}
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background:
-                      "conic-gradient(from 180deg at 50% 50%, var(--background-800) 360deg, transparent 0deg)",
-                  }}
-                />
-
                 {/* Cercle jaune */}
                 <div className="absolute inset-0 rounded-full">
                   {typeof lunarData?.day_of_cycle === "number" && (
@@ -136,7 +133,7 @@ export default function WakanApp() {
                         r="45"
                         fill="none"
                         stroke="var(--background-800)"
-                        strokeWidth="6"
+                        strokeWidth="5"
                       />
                       <circle
                         cx="50"
@@ -144,7 +141,7 @@ export default function WakanApp() {
                         r="45"
                         fill="none"
                         stroke="url(#grad)"
-                        strokeWidth="6"
+                        strokeWidth="4"
                         strokeLinecap="round"
                         strokeDasharray={`${
                           (lunarData.day_of_cycle / 29.5) * 282.6
@@ -162,7 +159,7 @@ export default function WakanApp() {
                 </div>
 
                 {/* Contenu */}
-                <div className="absolute inset-[6px] rounded-full bg-[--background-900] flex flex-col items-center justify-center text-center">
+                <div className="absolute inset-[6px] rounded-full flex flex-col items-center justify-center text-center">
                   <h2 className="text-title-med text-[--text-primary] leading-none mb-1">
                     {lunarData?.day_of_cycle
                       ? `J ${lunarData.day_of_cycle}`
@@ -178,56 +175,62 @@ export default function WakanApp() {
             </div>
 
             {/* Perigee/Apogee */}
-            <div className="card-glass p-4 flex flex-col justify-between h-[80px]">
+            <div className="card-glass p-4 flex flex-col justify-between">
               {/* Légendes + triangle */}
-              <div className="flex justify-between items-center w-full mb-1 px-1 text-para-lit text-[--text-secondary] gap-2">
-                <span>Périgée</span>
+              <div className="flex justify-between items-center w-full text-para-lit gap-2">
+                {/* Périgée */}
+                <span
+                  className={
+                    isPerigee
+                      ? "text-[--text-primary]"
+                      : "text-[--text-secondary]"
+                  }
+                >
+                  Périgée
+                </span>
 
                 {/* Conteneur relatif pour le triangle + le cercle */}
                 <div className="relative flex-1 h-4 mx-2">
-                  {/* Triangle inversé (base à gauche, pointe à droite) */}
                   <svg
                     className="absolute inset-0 w-full h-full"
                     viewBox="0 0 100 16"
                     preserveAspectRatio="none"
                   >
-                    {/* ici point A=100,8 (milieu côté large), B=0,0, C=0,16 */}
                     <polygon
                       points="100,8 0,0 0,16"
                       fill="var(--background-900)"
                     />
                   </svg>
 
-                  {/* Cercle dynamique au‑dessus */}
-                  {typeof lunarData?.distance_ratio === "number" &&
-                    (() => {
-                      const ratio = lunarData.distance_ratio; // 0 à 100
-                      const circleSize = 10 + ((100 - ratio) / 100) * 4; // 12 → 16px
-
-                      return (
-                        <div
-                          className="absolute top-1/2 z-10 rounded-full"
-                          style={{
-                            // on positionne de 0% (left) à 100% en fonction du ratio
-                            left: `${ratio}%`,
-                            width: `${circleSize}px`,
-                            height: `${circleSize}px`,
-                            backgroundColor: "rgba(246, 174, 49, 0.4)",
-                            border: "1px solid var(--rich-yellow, #F6DF31)",
-                            aspectRatio: "1 / 1",
-                            // on recentre parfaitement le cercle sur son point
-                            transform: "translate(-50%, -50%)",
-                          }}
-                        />
-                      );
-                    })()}
+                  {/* Cercle dynamique */}
+                  {typeof lunarData?.distance_ratio === "number" && (
+                    <div
+                      className="absolute top-1/2 z-10 rounded-full"
+                      style={{
+                        left: `${ratio}%`,
+                        width: `${10 + ((100 - ratio) / 100) * 4}px`,
+                        height: `${10 + ((100 - ratio) / 100) * 4}px`,
+                        backgroundColor: "rgba(246, 174, 49, 0.4)",
+                        border: "1px solid var(--rich-yellow, #F6DF31)",
+                        aspectRatio: "1 / 1",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    />
+                  )}
                 </div>
 
-                <span>Apogée</span>
+                {/* Apogée */}
+                <span
+                  className={
+                    isApogee
+                      ? "text-[--text-primary]"
+                      : "text-[--text-secondary]"
+                  }
+                >
+                  Apogée
+                </span>
               </div>
             </div>
-
-            {/* Fin de bloc */}
           </div>
 
           <div className="w-1/2">
@@ -318,19 +321,23 @@ export default function WakanApp() {
         </div>
 
         <div className="grid grid-cols-2 gap-2 w-full mb-8">
-          {/* Moon in Scorpio */}
+          {/* Lunar Zodiac */}
           <div
             className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center"
-            style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)" }}
+            style={{
+              boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)",
+            }}
           >
             <div className="my-2">
-              <Image
-                src="/placeholder.svg?height=40&width=40"
-                alt="Scorpio symbol"
-                width={40}
-                height={40}
-                className="object-contain text-[#f6ae31]"
-              />
+              {lunarData?.moon_sign && (
+                <Image
+                  src={`/zodiac/${lunarData.moon_sign.toLowerCase()}.svg`}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="object-contain icon_accent_glow"
+                />
+              )}
             </div>
             <p className="text-para-lit text-[--text-secondary]">Lune en</p>
             <h2 className="text-title-lit text-[--text-primary]">
@@ -338,7 +345,7 @@ export default function WakanApp() {
             </h2>
           </div>
 
-          {/* Element */}
+          {/* Lunar element */}
           <div className="bg-[#18272e] rounded-xl p-4 flex flex-row items-center justify-between">
             <div className="text-left">
               <p className="text-para-lit text-[--text-secondary]">Élément</p>
@@ -365,17 +372,18 @@ export default function WakanApp() {
         </ButtonCustom>
 
         {/* Free draws counter */}
-        <p className="text-[#cdbcae] mb-8">
+        <p className="text-para-lit text-[--text-primary]">
           10 tirages gratuits/mois - 8 restants
         </p>
 
-        {/* Decorative element */}
-        <div className="relative w-12 h-12 mb-8">
-          <div className="absolute inset-0 rounded-full border-2 border-[#f6ae31]/50 border-dashed"></div>
-          <div className="absolute inset-2 rounded-full border-2 border-[#f6ae31]"></div>
-          <div className="absolute inset-4 rounded-full bg-[#f6ae31]"></div>
-          <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#f6ae31]/50"></div>
-          <div className="absolute -right-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#f6ae31]/50"></div>
+        <div className="mt-8 mb-8">
+          <Image
+            src="/separator.svg"
+            alt=""
+            width={60}
+            height={37}
+            className="object-contain"
+          />
         </div>
 
         {/* Premium access card */}
