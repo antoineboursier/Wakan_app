@@ -64,7 +64,7 @@ export default function WakanApp() {
   //
 
   return (
-    <div className="relative flex flex-col items-center min-h-screen bg-gradient-to-b from-[#18272e] to-[#1c3039] text-white overflow-hidden">
+    <div className="relative flex flex-col items-center min-h-screen bg-gradient-to-b from-[--background-900] to-[--background-800] text-white overflow-hidden">
       <PageBackground imagePath="/backgrounds/home.png" />
       {/* Content container */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-md px-4 pt-10 pb-20">
@@ -88,7 +88,7 @@ export default function WakanApp() {
               newDate.setDate(newDate.getDate() - 1);
               setSelectedDate(newDate.toISOString().split("T")[0]);
             }}
-            className="text-white text-xl px-2"
+            className="text-white text-title-med px-2"
             aria-label="Jour précédent"
           >
             &lt;
@@ -109,7 +109,7 @@ export default function WakanApp() {
               newDate.setDate(newDate.getDate() + 1);
               setSelectedDate(newDate.toISOString().split("T")[0]);
             }}
-            className="text-white text-xl px-2"
+            className="text-white text-title-med px-2"
             aria-label="Jour suivant"
           >
             &gt;
@@ -211,7 +211,7 @@ export default function WakanApp() {
                         width: `${10 + ((100 - ratio) / 100) * 4}px`,
                         height: `${10 + ((100 - ratio) / 100) * 4}px`,
                         backgroundColor: "rgba(246, 174, 49, 0.4)",
-                        border: "1px solid var(--rich-yellow, #F6DF31)",
+                        border: "1px solid var(--rich-yellow)",
                         aspectRatio: "1 / 1",
                         transform: "translate(-50%, -50%)",
                       }}
@@ -237,8 +237,8 @@ export default function WakanApp() {
             {/* Lunar phase */}
 
             <div
-              className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center h-full justify-center"
-              style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)" }}
+              className="bg-[--background-900] rounded-xl p-4 flex flex-col items-center h-full justify-center"
+              style={{ boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.2)" }}
             >
               <p className="text-para-lit text-[--text-tertiary] mb-2">
                 Phase lunaire
@@ -323,9 +323,9 @@ export default function WakanApp() {
         <div className="grid grid-cols-2 gap-2 w-full mb-8">
           {/* Lunar Zodiac */}
           <div
-            className="bg-[#18272e] rounded-xl p-4 flex flex-col items-center"
+            className="bg-[--background-800] rounded-xl p-4 flex flex-col items-center"
             style={{
-              boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.4)",
+              boxShadow: "0px 8px 32px rgba(246, 174, 49, 0.2)",
             }}
           >
             <div className="my-2">
@@ -346,22 +346,22 @@ export default function WakanApp() {
           </div>
 
           {/* Lunar element */}
-          <div className="bg-[#18272e] rounded-xl p-4 flex flex-row items-center justify-between">
-            <div className="text-left">
-              <p className="text-para-lit text-[--text-secondary]">Élément</p>
-              <h2 className="text-title-lit text-[--text-primary]">
-                {lunarData?.element ?? "—"}
-              </h2>
+          <div className="card-glass rounded-xl p-4 flex flex-col items-center">
+            <div className="my-2">
+              {lunarData?.element && (
+                <Image
+                  src={`/element/${lunarData.element}.svg`}
+                  alt={`${lunarData.element} icon`}
+                  width={40}
+                  height={40}
+                  className="object-contain icon_accent_glow"
+                />
+              )}
             </div>
-            <div className="text-[#f6ae31]">
-              <Image
-                src="/placeholder.svg?height=30&width=30"
-                alt="Fire element"
-                width={30}
-                height={30}
-                className="object-contain"
-              />
-            </div>
+            <p className="text-para-lit text-[--text-secondary]">Élément</p>
+            <h2 className="text-title-lit text-[--text-primary]">
+              {lunarData?.element ?? "—"}
+            </h2>
           </div>
         </div>
 
@@ -378,24 +378,26 @@ export default function WakanApp() {
 
         <div className="mt-8 mb-8">
           <Image
-            src="/separator.svg"
+            src="/separatoranim.svg"
             alt=""
             width={60}
             height={37}
-            className="object-contain"
+            className="object-contain animate-spin-slow"
           />
         </div>
 
         {/* Premium access card */}
-        <div className="w-full border-2 border-dashed border-[#f6ae31] rounded-xl p-4 mb-8">
+        <div className="w-full border-2 border-dashed border-[--accent-900] rounded-xl p-4 mb-8">
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-[#cdbcae] mb-1">Accès premium</p>
-              <h3 className="text-2xl font-bold text-[#f6ae31]">2€/mois</h3>
-              <p className="text-[#f6ae31] font-bold mb-1">
+              <p className="text-[--text-secondary] mb-1">Accès premium</p>
+              <h3 className="text-2xl font-bold text-[--accent-900]">
+                2€/mois
+              </h3>
+              <p className="text-[--accent-700] font-bold mb-1">
                 Débloque tout, sans mauvaise surprise.
               </p>
-              <p className="text-[#cdbcae] text-sm">
+              <p className="text-[--accent-500] text-para">
                 Et bien sûr, c'est sans engagement.
               </p>
             </div>

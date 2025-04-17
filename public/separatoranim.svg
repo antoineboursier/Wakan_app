@@ -1,0 +1,45 @@
+<svg width="61" height="38" viewBox="0 0 61 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Cercle interne 1 -->
+    <circle cx="30" cy="19.0618" r="10.75" stroke="#F6AE31" stroke-width="1.5">
+        <animate
+            attributeName="r"
+            values="10.75;13.25;10.75"
+            dur="20s"
+            repeatCount="indefinite"
+        />
+    </circle>
+    <!-- Cercle interne 2 -->
+    <circle cx="30" cy="19.0618" r="14.25" stroke="#F5CE8A" stroke-width="0.5">
+        <animate
+            attributeName="r"
+            values="14.25;6.75;14.25"
+            dur="10s"
+            repeatCount="indefinite"
+        />
+    </circle>
+    <!-- Point central-->
+    <circle cx="30" cy="19.0618" r="2.5" fill="#F4EFEB">
+      <animate
+            attributeName="r"
+            values="2.5;4;2.5"
+            dur="10s"
+            repeatCount="indefinite"
+        />
+    </circle>
+    <!-- Cercle pointille externe-->
+    <circle cx="30" cy="19.0618" r="17.5" stroke="#F1BA5B" stroke-linecap="round" stroke-dasharray="2 3">
+        <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="rotate"
+            from="0 30 19.0618"
+            to="360 30 19.0618"
+            dur="100s"
+            repeatCount="indefinite"
+        />
+    </circle>
+    <!-- Point gauche-->
+    <circle cx="2" cy="19.0618" r="1.5" fill="#F4EFEB"/>
+    <!-- Point droite ?-->
+    <circle cx="59" cy="19.0618" r="1.5" fill="#F4EFEB"/>
+</svg>
